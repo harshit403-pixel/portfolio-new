@@ -1,0 +1,350 @@
+
+
+.work-section {
+  transition: 0s;
+  height: 100vh;
+  box-sizing: border-box;
+  will-change: transform;
+  background-color: #fff;
+  color: #000;
+  margin-bottom: 150px;
+}
+
+.work-container {
+  margin: auto;
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  align-content: stretch;
+}
+
+.work-flex {
+  width: 100%;
+  display: flex;
+  height: 100%;
+  margin-left: -80px;
+  padding-right: 120px;
+  position: relative;
+}
+
+.work-box {
+  padding: 40px 80px; /* Reduced vertical padding from 80px */
+  display: flex;
+  flex-direction: column;
+  width: 600px;
+  box-sizing: border-box;
+  border-right: 1px solid rgba(0, 0, 0, 0.1);
+  flex-shrink: 0;
+  gap: 30px; /* Reduced from 50px */
+  justify-content: start;
+}
+
+.work-flex .work-box:nth-child(even) {
+  flex-direction: column-reverse;
+}
+
+.work-flex::before,
+.work-flex::after {
+  content: "";
+  width: calc(50000vw);
+  height: 1px;
+  background-color: rgba(0, 0, 0, 0.1);
+  position: absolute;
+  left: 50%;
+  top: 0;
+  transform: translateX(-50%);
+}
+
+.work-flex::after {
+  top: 100%;
+}
+
+.work-title {
+  justify-content: space-between;
+  display: flex;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.work-title>div {
+  text-align: right;
+}
+
+.work-title h3 {
+  font-size: 50px;
+  line-height: 50px;
+  margin: 0;
+  font-weight: 600;
+}
+
+.work-info h4 {
+  font-size: 18px;
+  font-weight: 400;
+  margin: 0;
+}
+
+.work-info p {
+  font-weight: 200;
+  color: #adacac;
+  margin: 0;
+  margin-top: 3px;
+}
+
+.work-info>p {
+  width: 90%;
+}
+
+.work-image {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+}
+
+.work-image-in {
+  position: relative;
+}
+
+.work-image-in .work-link {
+  position: absolute;
+  right: 1rem;
+  z-index: 2;
+  width: 50px;
+  height: 50px;
+  background-color: rgba(0, 0, 0, 0.7);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  color: white;
+  opacity: 1;
+  transform: scale(1);
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+              background-color 0.4s ease, color 0.4s ease;
+  overflow: hidden;
+}
+
+.work-image-in .work-link.top-right {
+  top: 1rem;
+}
+
+.work-image-in .work-link.bottom-right {
+  bottom: 1rem;
+}
+
+.work-image-in:hover .work-link {
+  transform: scale(1.1);
+  background-color: white;
+  color: black;
+}
+
+/* Arrow container for slide effect */
+.arrow-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  width: 1em;
+  height: 1em;
+  /* Rotate container so the arrow points at exactly 35 degrees (natively 45 - 10 = 35) */
+  transform: rotate(5deg);
+}
+
+.arrow-main,
+.arrow-hover {
+  position: absolute;
+  /* Ultra-smooth spring physics for the slide */
+  transition: transform 0.65s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+/* No rotation here, just pure diagonal translation */
+.arrow-main {
+  transform: translate(0, 0) !important;
+}
+
+.arrow-hover {
+  /* Start outside bottom-left */
+  transform: translate(-150%, 150%) !important;
+}
+
+/* Hover state: one follows another */
+.work-image-in:hover .arrow-main {
+  /* Move outside top-right */
+  transform: translate(150%, -150%) !important;
+}
+
+.work-image-in:hover .arrow-hover {
+  /* Move into center */
+  transform: translate(0, 0) !important;
+}
+
+.work-image video {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background-color: #000;
+  object-fit: cover;
+}
+
+.work-image img {
+  max-width: 100%;
+  max-height: 350px;
+}
+
+@media only screen and (max-height: 900px) {
+  .work-image img {
+    max-height: 250px;
+  }
+
+  .work-box {
+    padding-top: 20px;
+    padding-bottom: 20px;
+  }
+}
+
+@media only screen and (max-width: 1400px) {
+  .work-title h3 {
+    font-size: 35px;
+  }
+
+  .work-info p {
+    font-size: 13px;
+  }
+
+  .work-info h4 {
+    font-size: 15px;
+  }
+
+  .work-box {
+    width: 450px;
+    padding: 50px;
+  }
+
+  .work-flex {
+    margin-left: -50px;
+    padding-right: 75px;
+  }
+}
+
+@media only screen and (max-width: 1400px) {
+  .work-box {
+    width: 350px;
+    padding: 30px;
+  }
+
+  .work-flex {
+    margin-left: -30px;
+    padding-right: 45px;
+  }
+}
+
+@media only screen and (max-height: 650px) {
+  .work-image img {
+    max-height: 200px;
+  }
+
+  .work-box {
+    gap: 20px;
+  }
+}
+
+/* @media only screen and (max-width: 900px) {
+  .work-image img {
+    max-height: 200px;
+  }
+  .work-section h2 {
+    font-size: 40px;
+    margin-bottom: 20px;
+  }
+  .work-box {
+    gap: 20px;
+  }
+} */
+@media only screen and (max-width: 1025px) {
+  .work-container {
+    align-content: normal;
+    padding: 0 20px;
+  }
+
+  .work-flex {
+    height: auto;
+  }
+}
+
+@media only screen and (max-width: 1024px) {
+  .work-section {
+    height: auto;
+  }
+
+  .work-flex {
+    flex-direction: column;
+    height: auto;
+    margin-left: 0;
+    padding-right: 0;
+  }
+
+  .work-box {
+    width: 100%;
+    border-right: none;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    padding: 3rem 1rem;
+  }
+
+  .work-flex .work-box:nth-child(even) {
+    flex-direction: column;
+  }
+
+  /* Hide the hover animation circle on touch devices/mobile */
+  .work-image-in .work-link {
+    display: none;
+  }
+}
+
+/* ─── Let's Connect Box ──────────────────────────────────────────────────── */
+.work-connect-box {
+  border-right: none;
+  justify-content: center;
+  align-items: center;
+}
+
+.connect-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 16px;
+}
+
+.connect-content h3 {
+  font-size: 48px;
+  font-weight: 700;
+  line-height: 1.1;
+  margin: 0;
+}
+
+.connect-content p {
+  font-size: 16px;
+  color: #888;
+  max-width: 280px;
+  margin: 0;
+}
+
+.connect-btn {
+  display: inline-block;
+  margin-top: 12px;
+  padding: 14px 32px;
+  background-color: #a374ff; /* Updated to accent color */
+  color: #fff;
+  border-radius: 999px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 15px;
+  transition: transform 0.3s ease;
+}
+
+.connect-btn:hover {
+  transform: scale(1.05);
+}
