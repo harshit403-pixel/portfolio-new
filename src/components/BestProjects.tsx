@@ -14,37 +14,30 @@ const PROJECTS = [
     category: "Full-Stack Web Application",
     tools: "React, Vite, Express, MongoDB, Cloudinary, Gemini API",
     image: "/images/LinksHub.png",
-    link: "https://github.com/harshit403-pixel/LinksHub",
+    link: "https://linkshub.onrender.com/",
   },
   {
     name: "DevHub",
     category: "Developer Platform",
     tools: "React, Vite, Node.js, Express, MongoDB",
     image: "/images/DevHub.png",
-    link: "https://github.com/harshit403-pixel/DevHub",
+    link: "https://devhub-lemon.vercel.app/",
   },
   {
     name: "RipVscode",
     category: "Code Editor Clone",
     tools: "React, Monaco Editor, JavaScript, UI Engineering",
     image: "/images/RipVscode.png",
-    link: "https://github.com/harshit403-pixel/RipVscode",
+    link: "https://rip-vscode.vercel.app/",
   },
   {
-    name: "WhatsApp Desktop",
-    category: "Desktop Chat Application",
-    tools: "React, Electron, Node.js, Real-Time Messaging",
+    name: "Bidding Wars",
+    category: "Real-Time Auction Platform",
+    tools: "React, Node.js, Express, MongoDB, Socket.IO",
     image: "/images/Whatsapp.png",
-    link: "https://github.com/harshit403-pixel/WhatsApp",
+    link: "https://bidding-wars-skkn.onrender.com/",
   },
-  {
-    name: "SLUSH",
-    category: "Web Application",
-    tools: "React, JavaScript, Tailwind CSS, GSAP",
-    image: "/images/Slush.png",
-    link: "https://github.com/harshit403-pixel/SLUSH",
-  },
-]
+];
 
 const BestProjects = () => {
 
