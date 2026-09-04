@@ -4,13 +4,49 @@ import styles from './hero.module.css'
 import { useState, useEffect, useRef } from 'react'
 import Image from 'next/image'
 import gsap from 'gsap'
+import HeroFolders from './HeroFolders'
 
 const STICKERS = [
-  { id: 1, src: '/Card-Sticker SVG/sticker-camera.svg', top: '85%', left: '85%', rotate: 15, width: 140 },
-  { id: 2, src: '/Card-Sticker SVG/sticker-hand.svg', top: '80%', left: '12%', rotate: -25, width: 110 },
-  { id: 3, src: '/Card-Sticker SVG/sticker-heart.svg', top: '18%', left: '82%', rotate: -22, width: 130 },
-  { id: 4, src: '/Card-Sticker SVG/sticker-phone.svg', top: '12%', left: '15%', rotate: -15, width: 130 },
-  { id: 5, src: '/Card-Sticker SVG/sticker-smiley.svg', top: '45%', left: '8%', rotate: -10, width: 125 }
+  {
+    id: 1,
+    src: '/Card-Sticker SVG/sticker-camera.svg',
+    top: '85%',
+    left: '85%',
+    rotate: 15,
+    width: 140
+  },
+  {
+    id: 2,
+    src: '/Card-Sticker SVG/sticker-hand.svg',
+    top: '80%',
+    left: '12%',
+    rotate: -25,
+    width: 110
+  },
+  {
+    id: 3,
+    src: '/Card-Sticker SVG/sticker-heart.svg',
+    top: '18%',
+    left: '82%',
+    rotate: -22,
+    width: 130
+  },
+  {
+    id: 4,
+    src: '/Card-Sticker SVG/sticker-phone.svg',
+    top: '12%',
+    left: '15%',
+    rotate: -15,
+    width: 130
+  },
+  {
+    id: 5,
+    src: '/Card-Sticker SVG/sticker-smiley.svg',
+    top: '45%',
+    left: '8%',
+    rotate: -10,
+    width: 125
+  }
 ]
 
 export default function Hero() {
@@ -21,11 +57,15 @@ export default function Hero() {
   useEffect(() => {
     setWindowWidth(window.innerWidth)
 
-    const resize = () => setWindowWidth(window.innerWidth)
+    const resize = () => {
+      setWindowWidth(window.innerWidth)
+    }
 
     window.addEventListener('resize', resize)
 
-    return () => window.removeEventListener('resize', resize)
+    return () => {
+      window.removeEventListener('resize', resize)
+    }
   }, [])
 
   useEffect(() => {
@@ -37,8 +77,15 @@ export default function Hero() {
       const move = (e: MouseEvent) => {
         const rect = sticker.getBoundingClientRect()
 
-        const x = e.clientX - rect.left - rect.width / 2
-        const y = e.clientY - rect.top - rect.height / 2
+        const x =
+          e.clientX -
+          rect.left -
+          rect.width / 2
+
+        const y =
+          e.clientY -
+          rect.top -
+          rect.height / 2
 
         gsap.to(sticker, {
           x: x * 0.28,
@@ -78,66 +125,75 @@ export default function Hero() {
 
     setTimeout(() => {
       el.style.backgroundColor = 'transparent'
-    }, 300)
+    }, 700)
   }
 
+  /*
+    7vw = block width and height
+
+    Example:
+    1440px viewport
+    7vw = 100.8px
+
+    Number of columns is calculated dynamically
+    so the grid always fills the viewport.
+  */
+  const blockSize = windowWidth * 0.05
+
   const getBlocks = () => {
-    const blockSize = windowWidth * 0.05
-    const nbOfBlocks = Math.ceil(window.innerHeight / blockSize)
+    if (!blockSize) return null
+
+    const nbOfBlocks = Math.ceil(
+      window.innerHeight / blockSize
+    )
 
     return [...Array(nbOfBlocks).keys()].map((_, index) => (
       <div
         key={index}
-        onMouseEnter={(e) => colorize(e.target as HTMLElement)}
+        onMouseEnter={(e) => colorize(e.currentTarget)}
       />
     ))
   }
 
+  const numberOfColumns = blockSize
+    ? Math.ceil(windowWidth / blockSize)
+    : 0
+
   return (
     <section className={styles.container}>
-      {STICKERS.map((s, index) => (
-        <div
-          key={s.id}
-          ref={(el) => {
-            stickerRefs.current[index] = el
-          }}
-          className={styles.sticker}
-          style={{
-            top: s.top,
-            left: s.left,
-            width: `${s.width}px`,
-            height: `${s.width}px`,
-            transform: `translate(-50%, -50%) rotate(${s.rotate}deg)`
-          }}
-        >
-          <Image
-            src={s.src}
-            alt="sticker"
-            fill
-            priority
-            style={{ objectFit: 'contain' }}
-          />
-        </div>
-      ))}
+
+     <div className={styles.heroFolders}>
+  <HeroFolders />
+</div>
 
       <div className={styles.body}>
         <p>
           Hi, I am Harshit,{' '}
-          <span className={styles.keepTogether}>
-            a Full-Stack Engineer
+
+            
+            <span className={styles.keepTogether}>
+            a full-Stack Engineer
+      
           </span>{' '}
+
           building scalable web applications.
         </p>
       </div>
 
       <div className={styles.grid}>
         {windowWidth > 0 &&
-          [...Array(20).keys()].map((_, index) => (
-            <div key={index} className={styles.column}>
-              {getBlocks()}
-            </div>
-          ))}
+          [...Array(numberOfColumns).keys()].map(
+            (_, index) => (
+              <div
+                key={index}
+                className={styles.column}
+              >
+                {getBlocks()}
+              </div>
+            )
+          )}
       </div>
+
     </section>
   )
 }

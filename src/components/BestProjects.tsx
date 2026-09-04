@@ -130,7 +130,7 @@ gsap.registerPlugin(ScrollTrigger);
   }, []);
 
   return (
-    <section ref={sectionRef} className="work-section" id="work">
+    <section ref={sectionRef} className="work-section" id="work" >
       <div className="work-container section-container">
         <h2
           ref={titleRef}
