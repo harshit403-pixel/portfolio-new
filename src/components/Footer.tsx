@@ -140,27 +140,11 @@ export default function Footer() {
                         <span className="footer-badge">open to work</span>
                         <h3>let&apos;s build together</h3>
                     </div>
-                    {/* Location */}
-                    <div className="footer-column">
-                        <span className="footer-badge">location</span>
-                        <address>
-                            Remote<br />
-                            Worldwide
-                        </address>
-                        <a href="#" className="footer-map-link">
-                            <span>Google Maps</span>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 169 10" fill="none" className="draw-btn__svg">
-                                <path d="M1 6.5661C56.3941 3.06082 112.187 1.20095 168 0.999878" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.25"></path>
-                                <path d="M32.1313 8.63371C68.2147 6.92799 104.462 6.13378 140.695 6.25107" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.25"></path>
-                            </svg>
-                        </a>
-                    </div>
+  
                     {/* Contact */}
                     <div className="footer-column">
                         <span className="footer-badge">contact</span>
                         <a href="mailto:harshuraghu7999@gmail.com" className="footer-email">harshuraghu7999@gmail.com</a>
-                        <a href="https://wa.me/yourwhatsappnumber" className="footer-whatsapp">send me a whatsapp*</a>
-                        <p className="footer-note">*Always open to discussing new ideas.</p>
                         <div className="footer-socials" id="footer-socials">
                             {SOCIAL_ICONS.map(({ href, label, svg }) => (
                                 <a

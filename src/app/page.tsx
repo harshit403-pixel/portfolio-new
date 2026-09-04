@@ -12,13 +12,13 @@ import Footer from "@/components/Footer";
 import { ReactLenis } from 'lenis/react';
 
 export default function Home() {
-  const [isLoading, setIsLoading] = useState(true);
+  // const [isLoading, setIsLoading] = useState(true);
 
   return (
     <ReactLenis root options={{ lerp: 0.08 }}>
-      {isLoading && <Preloader onComplete={() => setIsLoading(false)} />}
+      {/* {isLoading && <Preloader onComplete={() => setIsLoading(false)} />} */}
 
-      <div className={isLoading ? "h-screen overflow-hidden" : ""}>
+      <div >
         <ScrollProgress />
         <Navbar />
         <Hero />

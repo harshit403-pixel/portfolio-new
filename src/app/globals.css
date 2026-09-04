@@ -33,37 +33,40 @@ html.lenis body {
   pointer-events: none;
 }
 
+/* Fonts */
 @font-face {
-  font-family: 'Boldonse';
-  src: url('/fonts/Boldonse.ttf') format('truetype');
+  font-family: "Boldonse";
+  src: url("/fonts/Boldonse.ttf") format("truetype");
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
-  font-family: 'Signature';
-  src: url('/fonts/signature.otf') format('opentype');
+  font-family: "Signature";
+  src: url("/fonts/signature.otf") format("opentype");
   font-weight: normal;
   font-style: normal;
 }
 
-.font-signature {
-  font-family: 'Signature', sans-serif;
-}
-
 @font-face {
-  font-family: 'Google Sans Flex';
-  src: url('/fonts/GoogleSansFlex.ttf') format('truetype');
+  font-family: "Google Sans Flex";
+  src: url("/fonts/GoogleSansFlex.ttf") format("truetype");
   font-weight: 100 1000;
   font-style: normal;
 }
 
+.font-signature {
+  font-family: "Signature", sans-serif;
+}
+
+/* Theme colors */
 :root {
   --base-100: #f0eeee;
   --base-200: #a374ff;
   --base-300: #222225;
 }
 
+/* Body */
 body {
   margin: 0;
   padding: 0;
@@ -71,30 +74,49 @@ body {
   font-family: "Google Sans Flex", sans-serif;
   background-color: var(--color-background);
   color: var(--color-foreground);
-  cursor: url('/Cursor SVG/cursor-default.svg') 16 16, auto;
-  -ms-overflow-style: none;  /* IE and Edge */
-  scrollbar-width: none;  /* Firefox */
+
+  cursor: url("/Cursor SVG/cursor-default.svg") 16 16, auto;
+
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
-/* Hide scrollbar for Chrome, Safari and Opera */
+/* Hide scrollbar */
 ::-webkit-scrollbar {
   display: none;
 }
 
-a, button, [role="button"], input[type="submit"], input[type="button"], .nav-toggle, .nav-toggle p, .nav-toggle-menu, .nav-toggle-close, .menu-col a, h3 a {
-  cursor: url('/Cursor SVG/cursor-pointer.svg') 16 16, pointer !important;
+/* Pointer cursor */
+a,
+button,
+[role="button"],
+input[type="submit"],
+input[type="button"] {
+  cursor: url("/Cursor SVG/cursor-pointer.svg") 16 16, pointer !important;
 }
 
-p, h1, h2, h3, h4, h5, h6, span, input[type="text"], textarea {
-  cursor: url('/Cursor SVG/cursor-text.svg') 16 16, text;
+/* Text cursor */
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+span,
+input[type="text"],
+textarea {
+  cursor: url("/Cursor SVG/cursor-text.svg") 16 16, text;
 }
 
+/* Images */
 img {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
 
+/* Headings */
 h1 {
   font-size: clamp(2.5rem, 5vw, 5rem);
   line-height: 1.35;
@@ -116,21 +138,14 @@ h6 {
   font-size: clamp(1rem, 1.25vw, 1.5rem);
 }
 
-.nav p,
-.menu p {
-  text-transform: uppercase;
-  font-family: "Google Sans Flex";
-  font-size: 0.7rem;
-  font-weight: 600;
-  letter-spacing: 0.25rem;
-}
-
+/* Hero */
 .hero {
   position: relative;
   width: 100%;
   height: 100svh;
 }
 
+/* Navbar */
 .nav {
   position: fixed;
   top: 0;
@@ -150,113 +165,16 @@ h6 {
   color: #fff;
 }
 
-
-.nav-toggle {
-  position: absolute;
-  top: 2rem;
-  right: 2rem;
-  pointer-events: all;
-  cursor: pointer;
-  color: #fff;
-}
-
-.nav-toggle-menu {
-  color: #fff;
-}
-
-.nav-toggle-close {
-  position: absolute;
-  top: 0;
-  right: 0;
-  color: #fff;
-  opacity: 0;
-}
-
-.menu {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100svh;
-  padding: 2.5rem;
-  display: flex;
-  gap: 2rem;
-  color: var(--base-300);
-  pointer-events: none;
-  z-index: 40;
-}
-
-.menu.is-open {
-  pointer-events: all;
-}
-
-.menu-bg-svg {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  z-index: -1;
-}
-
-.menu-col {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-}
-
-.menu-col a {
-  text-decoration: none;
-  color: var(--base-300);
-  font-family: "Boldonse";
-  font-size: clamp(2.5rem, 5vw, 5rem);
-  line-height: 1.35;
-  width: max-content;
-  overflow: visible;
-}
-
-.menu-col p {
-  color: var(--base-200);
-  margin-bottom: 1rem;
-}
-
-.menu a .char,
-.menu-col h3,
-.menu-col h6,
-.menu-col p {
-  will-change: transform, opacity;
-}
-
+/* Tablet */
 @media (max-width: 1000px) {
-  .menu {
-    flex-direction: column-reverse;
-    padding-top: 8rem;
-  }
-
-  .menu-col-links {
-    flex: 1.5;
-  }
-
   .nav-logo {
     width: 10rem;
     top: 2rem;
   }
 }
 
+/* Mobile */
 @media (max-width: 768px) {
-  .menu {
-    padding: 1.5rem;
-    padding-top: 6rem;
-    gap: 1rem;
-  }
-
-  .nav-toggle {
-    top: 1.5rem;
-    right: 1.5rem;
-  }
-
   .nav-logo {
     top: 1.5rem;
     left: 1.5rem;
