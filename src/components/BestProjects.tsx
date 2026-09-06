@@ -14,7 +14,7 @@ const PROJECTS = [
     category: "Full-Stack Web Application",
     tools: "React, Vite, Express, MongoDB, Cloudinary, Gemini API",
     image: "/images/LinksHub.png",
-    link: "https://linkshub.onrender.com/",
+    link: "https://linkshub-np0r.onrender.com/",
   },
   {
     name: "DevHub",
