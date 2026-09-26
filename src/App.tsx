@@ -6,7 +6,7 @@ import { Nav } from "@/components/nav";
 import { Footer } from "@/components/footer";
 import { SideIndex } from "@/components/SideIndex";
 import { Hero } from "@/sections/Hero";
-import { About } from "@/sections/About";
+import { About } from "@/sections/About";  
 import { Contact } from "@/sections/Contact";
 import { Projects } from "@/sections/Projects";
 import { Experience } from "@/sections/Experience";
