@@ -1,0 +1,438 @@
+@import "lenis/dist/lenis.css";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+/* ------------------------------------------------------------------ */
+/*  Amiamie Custom Typography                                         */
+/* ------------------------------------------------------------------ */
+
+/* Amiamie Regular */
+@font-face {
+  font-family: "Amiamie";
+  src:
+    url("/fonts/amiamie/otf/Amiamie-Regular.otf") format("opentype"),
+    url("/fonts/amiamie/ttf/Amiamie-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Amiamie Regular Italic */
+@font-face {
+  font-family: "Amiamie";
+  src:
+    url("/fonts/amiamie/otf/Amiamie-Italic.otf") format("opentype"),
+    url("/fonts/amiamie/ttf/Amiamie-Italic.ttf") format("truetype");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* Amiamie Light */
+@font-face {
+  font-family: "Amiamie";
+  src:
+    url("/fonts/amiamie/otf/Amiamie-Light.otf") format("opentype"),
+    url("/fonts/amiamie/ttf/Amiamie-Light.ttf") format("truetype");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Amiamie Light Italic */
+@font-face {
+  font-family: "Amiamie";
+  src:
+    url("/fonts/amiamie/otf/Amiamie-LightItalic.otf") format("opentype"),
+    url("/fonts/amiamie/ttf/Amiamie-LightItalic.ttf") format("truetype");
+  font-weight: 300;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* Amiamie Black */
+@font-face {
+  font-family: "Amiamie";
+  src:
+    url("/fonts/amiamie/otf/Amiamie-Black.otf") format("opentype"),
+    url("/fonts/amiamie/ttf/Amiamie-Black.ttf") format("truetype");
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Amiamie Black Italic */
+@font-face {
+  font-family: "Amiamie";
+  src:
+    url("/fonts/amiamie/otf/Amiamie-BlackItalic.otf") format("opentype"),
+    url("/fonts/amiamie/ttf/Amiamie-BlackItalic.ttf") format("truetype");
+  font-weight: 900;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* Amiamie-Round Regular */
+@font-face {
+  font-family: "Amiamie-Round";
+  src:
+    url("/fonts/amiamie/otf/Amiamie-RegularRound.otf") format("opentype"),
+    url("/fonts/amiamie/ttf/Amiamie-RegularRound.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Amiamie-Round Black */
+@font-face {
+  font-family: "Amiamie-Round";
+  src:
+    url("/fonts/amiamie/otf/Amiamie-BlackRound.otf") format("opentype"),
+    url("/fonts/amiamie/ttf/Amiamie-BlackRound.ttf") format("truetype");
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Amiamie-Round Black Italic */
+@font-face {
+  font-family: "Amiamie-Round";
+  src:
+    url("/fonts/amiamie/otf/Amiamie-BlackItalicRound.otf") format("opentype"),
+    url("/fonts/amiamie/ttf/Amiamie-BlackItalicRound.ttf") format("truetype");
+  font-weight: 900;
+  font-style: italic;
+  font-display: swap;
+}
+
+
+/* ------------------------------------------------------------------ */
+/*  Onyx Theme CSS Variables                                          */
+/* ------------------------------------------------------------------ */
+
+:root {
+  --bg: #0a0a0a;
+  --fg: #f5f5f4;
+  --muted: #a1a1aa;
+  --soft: #63636b;
+
+  --line: rgba(255, 255, 255, 0.10);
+  --stripe: rgba(255, 255, 255, 0.055);
+  --hover: rgba(255, 255, 255, 0.05);
+
+  --card: #101010;
+  --chip: #161616;
+
+  --font-serif: "Instrument Serif", Georgia, serif;
+  --font-sans: "Amiamie", "Inter", system-ui, sans-serif;
+  --font-amiamie-round: "Amiamie-Round", sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+
+  /* Theme transition origin */
+  --theme-x: 50vw;
+  --theme-y: 50vh;
+}
+
+.light {
+  --bg: #fcfcfb;
+  --fg: #18181b;
+  --muted: #52525b;
+  --soft: #a1a1aa;
+
+  --line: rgba(0, 0, 0, 0.10);
+  --stripe: rgba(0, 0, 0, 0.055);
+  --hover: rgba(0, 0, 0, 0.04);
+
+  --card: #ffffff;
+  --chip: #f4f4f5;
+}
+
+
+/* ------------------------------------------------------------------ */
+/*  Base                                                              */
+/* ------------------------------------------------------------------ */
+
+* {
+  border-color: var(--line);
+
+  /* Correct scrollbar syntax */
+  scrollbar-color: var(--line) var(--bg);
+}
+
+html {
+  scroll-behavior: auto;
+  font-family: var(--font-sans);
+  background-color: var(--bg);
+  color: var(--fg);
+  overflow-x: hidden;
+
+  /*
+   * Prevent the browser from adding another
+   * transition on the document itself.
+   */
+  transition: none;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--bg);
+  color: var(--fg);
+
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  text-rendering: optimizeLegibility;
+
+  min-height: 100vh;
+  overflow-x: hidden;
+
+  /*
+   * IMPORTANT:
+   * Do not add background/color transitions here.
+   * View Transition API handles the theme animation.
+   */
+  transition: none;
+}
+
+
+/* ------------------------------------------------------------------ */
+/*  Typography                                                        */
+/* ------------------------------------------------------------------ */
+
+.font-serif {
+  font-family: var(--font-serif);
+}
+
+.font-mono {
+  font-family: var(--font-mono);
+}
+
+
+/* ------------------------------------------------------------------ */
+/*  RGB Chromatic Aberration Text Shadow                              */
+/* ------------------------------------------------------------------ */
+
+.text-glitch {
+  text-shadow:
+    -1.5px 0 0 rgba(0, 200, 255, 0.6),
+    1.5px 0 0 rgba(255, 80, 0, 0.6);
+}
+
+
+/* ------------------------------------------------------------------ */
+/*  Repeating Linear Gradient Stripes                                 */
+/* ------------------------------------------------------------------ */
+
+.bg-stripes {
+  background-image:
+    repeating-linear-gradient(
+      315deg,
+      var(--stripe) 0,
+      var(--stripe) 1px,
+      transparent 1px,
+      transparent 7px
+    );
+}
+
+
+/* ------------------------------------------------------------------ */
+/*  Custom Scrollbar                                                  */
+/* ------------------------------------------------------------------ */
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--line);
+  border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--soft);
+}
+
+
+/* ------------------------------------------------------------------ */
+/*  Firefox Scrollbar                                                 */
+/* ------------------------------------------------------------------ */
+
+html {
+  scrollbar-width: thin;
+  scrollbar-color: var(--line) var(--bg);
+}
+
+
+/* ------------------------------------------------------------------ */
+/*  Selection                                                         */
+/* ------------------------------------------------------------------ */
+
+::selection {
+  background: var(--fg);
+  color: var(--bg);
+}
+
+
+/* ------------------------------------------------------------------ */
+/*  CRT Scanline Animation                                            */
+/* ------------------------------------------------------------------ */
+
+@keyframes scanline {
+  0% {
+    transform: translateY(-100%);
+  }
+
+  100% {
+    transform: translateY(100%);
+  }
+}
+
+.animate-scanline {
+  animation: scanline 8s linear infinite;
+}
+
+
+/* ------------------------------------------------------------------ */
+/*  Grid Utilities                                                    */
+/* ------------------------------------------------------------------ */
+
+.grid-rows-7 {
+  grid-template-rows: repeat(7, minmax(0, 1fr));
+}
+
+
+/* ------------------------------------------------------------------ */
+/*  THEME VIEW TRANSITION                                             */
+/* ------------------------------------------------------------------ */
+
+/*
+ * Disable the browser's default crossfade.
+ * We control the animation ourselves.
+ */
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
+
+/*
+ * OLD THEME
+ *
+ * This stays underneath the new theme.
+ * Therefore your content remains visible.
+ */
+
+::view-transition-old(root) {
+  z-index: 1;
+}
+
+
+/*
+ * NEW THEME
+ *
+ * Starts from the exact position of the
+ * theme button and expands outward.
+ */
+
+::view-transition-new(root) {
+  z-index: 2;
+
+  clip-path: circle(
+    0px at var(--theme-x) var(--theme-y)
+  );
+
+  animation:
+    theme-reveal
+    1.2s
+    cubic-bezier(0.22, 1, 0.36, 1)
+    forwards;
+}
+
+
+/*
+ * Theme reveal animation
+ */
+
+@keyframes theme-reveal {
+  0% {
+    clip-path: circle(
+      0px at var(--theme-x) var(--theme-y)
+    );
+  }
+
+
+
+  45% {
+    clip-path: circle(
+      45vmax at var(--theme-x) var(--theme-y)
+    );
+  }
+
+
+  100% {
+    clip-path: circle(
+      150vmax at var(--theme-x) var(--theme-y)
+    );
+  }
+}
+
+
+/*
+ * Prevent browser from adding another animation
+ * around the root transition.
+ */
+
+::view-transition-group(root) {
+  animation: none;
+}
+
+
+/*
+ * Keep the transition image pair isolated.
+ */
+
+::view-transition-image-pair(root) {
+  isolation: auto;
+}
+
+
+/* ------------------------------------------------------------------ */
+/*  Reduced Motion                                                    */
+/* ------------------------------------------------------------------ */
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation: none !important;
+    clip-path: none !important;
+  }
+
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* =========================================
+   PIXEL CURSOR TRAIL
+   ========================================= */
+
+canvas[aria-hidden="true"] {
+  pointer-events: none;
+}
+
+/* Don't show the effect on touch devices */
+@media (hover: none), (pointer: coarse) {
+  canvas[aria-hidden="true"] {
+    display: none;
+  }
+}
