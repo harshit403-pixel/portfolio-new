@@ -131,6 +131,9 @@
   --font-amiamie-round: "Amiamie-Round", sans-serif;
   --font-mono: "JetBrains Mono", monospace;
 
+  --neon-color: #ffffff;
+--neon-glow: rgba(255, 255, 255, 0.75);
+
   /* Theme transition origin */
   --theme-x: 50vw;
   --theme-y: 50vh;
@@ -145,6 +148,9 @@
   --line: rgba(0, 0, 0, 0.10);
   --stripe: rgba(0, 0, 0, 0.055);
   --hover: rgba(0, 0, 0, 0.04);
+
+   --neon-color: #2563eb;
+  --neon-glow: rgba(37, 99, 235, 0.75);
 
   --card: #ffffff;
   --chip: #f4f4f5;

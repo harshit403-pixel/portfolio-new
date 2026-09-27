@@ -4,6 +4,7 @@ import { Shell } from "@/components/Layout";
 import { site } from "@/config/site";
 import { MapPin, Search, RotateCw, Eye } from "lucide-react";
 import { useVisitor } from "@/context/VisitorContext";
+import { HireMeWeb } from "@/components/HireMeWeb";
 
 const HEADLINE_TITLES = [
   "Full Stack Developer",
@@ -31,7 +32,8 @@ export function Hero({ onOpenPalette }: { onOpenPalette?: () => void }) {
   }, []);
 
   return (
-    <>
+    <div className="relative ">
+      <HireMeWeb/>
       {/* Cover Banner */}
       <Shell className="">
         <div className="relative h-36 overflow-hidden  bg-neutral-950 sm:h-44 border border-[var(--line)]">
@@ -132,6 +134,6 @@ export function Hero({ onOpenPalette }: { onOpenPalette?: () => void }) {
           )}
         </motion.div>
       </Shell>
-    </>
+    </div>
   );
 }
