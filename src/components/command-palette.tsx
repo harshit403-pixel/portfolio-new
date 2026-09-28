@@ -270,8 +270,9 @@ export function CommandPalette({
             </div>
 
             <div 
+             data-lenis-prevent
               ref={listRef} 
-              className="flex-1 overflow-y-auto py-2 divide-y divide-neutral-800/40"
+              className="flex-1 overscroll-contain overflow-y-auto py-2 divide-y divide-neutral-800/40"
             >
               {filteredItems.length === 0 ? (
                 <div className="px-4 py-8 text-center font-mono text-xs text-neutral-500">
