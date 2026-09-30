@@ -12,7 +12,7 @@ interface MemoryBoardTriggerProps {
 export function MemoryBoardTrigger({
   message = "click to view memories",
   className = "absolute left-[3%] bottom-[22%] rotate-[-12deg] z-30 hidden md:block",
-  thumbnail = "/assets/memories-preview.png",
+  thumbnail = "/assets/memories-preview.webp",
 }: MemoryBoardTriggerProps) {
   const [hovered, setHovered] = useState(false);
   const [open, setOpen] = useState(false);
@@ -307,41 +307,44 @@ export function MemoryBoardTrigger({
                     SLIDE-UP CONTAINER
                 ================================================== */}
 
-                <motion.div
-                  key="memory-modal"
-                  className="
-                    fixed
-                    inset-x-0
-                    bottom-0
-                    z-[999999]
-                    flex
-                    h-[94vh]
-                    items-end
-                    justify-center
-                    px-3
-                    pb-3
-                    sm:px-5
-                    sm:pb-5
-                  "
-                  initial={{
-                    y: "100%",
-                  }}
-                  animate={{
-                    y: 0,
-                  }}
-                  exit={{
-                    y: "100%",
-                  }}
-                  transition={{
-                    type: "spring",
-                    stiffness: 180,
-                    damping: 25,
-                    mass: 0.9,
-                  }}
-                  onClick={(event) => {
-                    event.stopPropagation();
-                  }}
-                >
+             <motion.div
+  key="memory-modal"
+  className="
+    fixed
+    inset-x-0
+    bottom-0
+    z-[999999]
+    flex
+    h-[94vh]
+    items-end
+    justify-center
+    px-3
+    pb-3
+    sm:px-5
+    sm:pb-5
+  "
+  initial={{
+    y: "105%",
+    opacity: 0.98,
+  }}
+  animate={{
+    y: 0,
+    opacity: 1,
+  }}
+  exit={{
+    y: "105%",
+    opacity: 0.98,
+  }}
+  transition={{
+    type: "spring",
+    stiffness: 120,
+    damping: 22,
+    mass: 1,
+  }}
+  onClick={(event) => {
+    event.stopPropagation();
+  }}
+>
                   {/* ==================================================
                       BOARD
                   ================================================== */}
