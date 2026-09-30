@@ -83,7 +83,7 @@ export const site = {
 
   email: "harshuraghu7999@gmail.com",
 
-  greeting: "Hey, I'm Harshit",
+  greeting: "Hey, I'm Harshit", 
 
   tagline:
     "I build modern full-stack applications, scalable backend systems, and AI-powered products.",
