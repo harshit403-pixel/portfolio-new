@@ -6,6 +6,9 @@ import { MapPin, Search, RotateCw, Eye } from "lucide-react";
 import { useVisitor } from "@/context/VisitorContext";
 import { HireMeWeb } from "@/components/HireMeWeb";
 
+import { FloatingMessage } from "@/components/FloatingMessage";
+import { MemoryBoardTrigger } from "@/components/MemoryBoardTrigger";
+
 const HEADLINE_TITLES = [
   "Full Stack Developer",
   "Software Engineer",
@@ -33,7 +36,28 @@ export function Hero({ onOpenPalette }: { onOpenPalette?: () => void }) {
 
   return (
     <div className="relative ">
+     
+  <MemoryBoardTrigger />
+
       <HireMeWeb/>
+      <FloatingMessage
+  image="/profile.jpg"
+  message="let's build something!"
+  className="absolute right-[12%] top-[30%] z-30 hidden md:block"
+  avatarBorderColor="border-blue-800"
+/>
+      <FloatingMessage
+  image="/profile.jpg"
+  message="Click on Projects!"
+  className="absolute left-[12%] top-[560%] z-30 hidden md:block"
+  avatarBorderColor="border-blue-800"
+/>
+      <FloatingMessage
+  image="/profile.jpg"
+  message="Yes I am Consistent!"
+  className="absolute left-[12%] top-[1060%] z-30 hidden md:block"
+  avatarBorderColor="border-blue-800"
+/>
       {/* Cover Banner */}
       <Shell className="">
         <div className="relative h-36 overflow-hidden  bg-neutral-950 sm:h-44 border border-[var(--line)]">

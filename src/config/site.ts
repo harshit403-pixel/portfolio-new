@@ -144,7 +144,7 @@ export const site = {
       "mailto:harshuraghu7999@gmail.com",
 
     resume:
-      "YOUR_RESUME_LINK",
+      "https://drive.google.com/file/d/18u23i7ERgLpsvjb0ykOrbrsDEiKj-Lgx/view?usp=sharing",
 
     discord:
       "",
