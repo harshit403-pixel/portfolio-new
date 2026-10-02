@@ -7,7 +7,8 @@ import { useVisitor } from "@/context/VisitorContext";
 import { HireMeWeb } from "@/components/HireMeWeb";
 
 import { FloatingMessage } from "@/components/FloatingMessage";
-import { MemoryBoardTrigger } from "@/components/MemoryBoardTrigger";
+import FolderComponent from "@/components/FolderComponent";
+
 
 const HEADLINE_TITLES = [
   "Full Stack Developer",
@@ -37,25 +38,39 @@ export function Hero({ onOpenPalette }: { onOpenPalette?: () => void }) {
   return (
     <div className="relative ">
      
-  <MemoryBoardTrigger />
+<FolderComponent
+data-cursor-label="click to view memories"
+  color="blue"
+  size="sm"
+  className="left-[4%] bottom-[15%] z-30 rotate-[-4deg]"
+/>
 
       <HireMeWeb/>
       <FloatingMessage
   image="/profile.jpg"
-  message="let's build something!"
+  message="Have A Good Day!"
   className="absolute right-[12%] top-[30%] z-30 hidden md:block"
   avatarBorderColor="border-blue-800"
 />
-      <FloatingMessage
+
+<FloatingMessage
   image="/profile.jpg"
-  message="Click on Projects!"
+  message="Keep Exploring!"
   className="absolute left-[12%] top-[560%] z-30 hidden md:block"
   avatarBorderColor="border-blue-800"
 />
-      <FloatingMessage
+
+<FloatingMessage
   image="/profile.jpg"
-  message="Yes I am Consistent!"
+  message="Thanks For Visiting!"
   className="absolute left-[12%] top-[1060%] z-30 hidden md:block"
+  avatarBorderColor="border-blue-800"
+/>
+
+<FloatingMessage
+  image="/profile.jpg"
+  message="Follow On X (Twitter)"
+  className="absolute right-[12%] top-[700%] z-30 hidden md:block"
   avatarBorderColor="border-blue-800"
 />
       {/* Cover Banner */}
@@ -75,7 +90,9 @@ export function Hero({ onOpenPalette }: { onOpenPalette?: () => void }) {
       </Shell>
 
       {/* Profile Avatar & Identity */}
-      <Shell className="px-6 py-6 sm:px-8">
+      <Shell
+        
+      className="px-6 py-6 sm:px-8">
         <motion.div
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
@@ -86,7 +103,7 @@ export function Hero({ onOpenPalette }: { onOpenPalette?: () => void }) {
             <div 
               onClick={handleNextImage}
               className="relative grid size-20 shrink-0 place-items-center overflow-hidden rounded-xl border border-[var(--line)] bg-[var(--chip)] shadow-md group cursor-pointer select-none animate-fade-up"
-              title="Click to change profile image"
+              data-cursor-label="click to switch profile image"
             >
               {/* Main Avatar Image */}
               <img
@@ -150,7 +167,7 @@ export function Hero({ onOpenPalette }: { onOpenPalette?: () => void }) {
             <button
               onClick={onOpenPalette}
               className="flex items-center gap-2 rounded-lg border border-[var(--line)] bg-[var(--chip)] px-3 py-1.5 font-mono text-[11px] text-[var(--muted)] hover:text-[var(--fg)] hover:border-[var(--soft)] transition-colors shadow-sm cursor-pointer"
-              title="Open Command Palette (Ctrl+K)"
+              data-cursor-label="open command palette"
             >
               <Search size={14} />
               <span>⌘K</span>

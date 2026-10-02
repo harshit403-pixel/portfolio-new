@@ -164,7 +164,9 @@ export function Projects({
           )}
 
           {/* Projects */}
-          <div className="grid gap-4 sm:grid-cols-2">
+          <div
+          data-cursor-label="click to view project details"
+          className="grid gap-4 sm:grid-cols-2">
             <AnimatePresence mode="popLayout">
               {displayedProjects.map((p, idx) => (
                 <motion.div

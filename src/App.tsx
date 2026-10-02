@@ -31,6 +31,7 @@ import { ContactPage } from "./pages/ContactPage";
 import { NotFoundSign } from "@/components/NotFoundSign";
 
 import { Analytics } from "@vercel/analytics/react";
+import CursorGuide from "./components/CursorGuide";
 
 /* ============================================================
    VALID PORTFOLIO ROUTES
@@ -341,7 +342,7 @@ export function App() {
       <LenisProvider>
         <VisitorProvider>
           <BrowserRouter>
-            <PixelCursor />
+            <CursorGuide/>
 
             <Analytics />
 
