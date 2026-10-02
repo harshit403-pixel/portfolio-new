@@ -24,7 +24,7 @@ const avatarSizes = {
 
 export function FloatingMessage({
   image,
-  message = "have a nice day!",
+  message,
   className = "absolute left-[8%] bottom-[22%] z-30 hidden md:block",
   avatarSize = "md",
   avatarBorderColor = "border-cyan-300",
@@ -36,6 +36,7 @@ export function FloatingMessage({
 
   return (
     <div
+      data-cursor-label={message}
       className={className}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
@@ -67,7 +68,6 @@ export function FloatingMessage({
         }
         className="relative cursor-pointer"
       >
-        {/* Avatar */}
         <div
           className={`
             relative
@@ -93,56 +93,6 @@ export function FloatingMessage({
             <div className="h-full w-full bg-neutral-200" />
           )}
         </div>
-
-        {/* Reusable hover message */}
-        <AnimatePresence>
-          {hovered && (
-            <motion.div
-              initial={{
-                opacity: 0,
-                scale: 0.7,
-                x: -5,
-                y: 5,
-              }}
-              animate={{
-                opacity: 1,
-                scale: 1,
-                x: 0,
-                y: 0,
-              }}
-              exit={{
-                opacity: 0,
-                scale: 0.7,
-                x: -5,
-                y: 5,
-              }}
-              transition={{
-                type: "spring",
-                stiffness: 400,
-                damping: 20,
-              }}
-              className={`
-                pointer-events-none
-                absolute
-                left-10
-                top-8
-                whitespace-nowrap
-                rounded-full
-                border
-                border-black
-                bg-black
-                px-3
-                py-1.5
-                shadow-[3px_3px_0px_rgba(0,0,0,0.15)]
-                ${messageClassName}
-              `}
-            >
-              <span className="font-mono text-[9px] font-bold uppercase tracking-wide text-white">
-                {message}
-              </span>
-            </motion.div>
-          )}
-        </AnimatePresence>
       </motion.div>
     </div>
   );
