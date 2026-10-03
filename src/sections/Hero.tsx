@@ -38,12 +38,14 @@ export function Hero({ onOpenPalette }: { onOpenPalette?: () => void }) {
   return (
     <div className="relative ">
      
-<FolderComponent
+<div className="hidden md:block">
+  <FolderComponent
 data-cursor-label="click to view memories"
   color="blue"
   size="sm"
-  className="left-[4%] bottom-[15%] z-30 rotate-[-4deg]"
+  className="left-[4%] bottom-[-290%] z-30 rotate-[-4deg]"
 />
+</div>
 
       <HireMeWeb/>
       <FloatingMessage
