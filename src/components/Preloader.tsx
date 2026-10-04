@@ -19,6 +19,7 @@ type Kind = "media" | "text" | "btn" | "card";
 type Item = {
   kind: Kind;
   x: number; y: number; w: number; h: number;
+  boxW?: number; // wireframe width when stretched wider than the real element (ghost text keeps w)
   label: string;
   text?: string;
   textStyle?: CSSProperties;
@@ -26,7 +27,8 @@ type Item = {
   radius?: string;
 };
 
-const TEXT_AT = 62; // % where wireframes turn into ghost copy
+const TEXT_AT = 90; // % where wireframes turn into ghost copy (higher = wireframes stay on screen longer)
+const BOX_SPAN = 76; // boxes finish drawing in by this % so the wireframe is fully visible before the text swaps in
 const HOLD_MS = 350; // pause on 100% before the wipe
 const WIPE_MS = 1100;
 const MAX_ITEMS = 70;
@@ -131,6 +133,18 @@ function measurePage(): Item[] {
     }
   });
 
+  // Stretch narrow section boxes (About / GitHub / etc.) out to the full content width.
+  // Only the wireframe grows; the ghost text keeps the element's real width so it still lines up.
+  const wide = items.filter((it) => it.kind === "text" && it.w >= 300);
+  if (wide.length) {
+    const contentRight = Math.max(...wide.map((it) => it.x + it.w));
+    items.forEach((it) => {
+      const big = it.w >= 160 && (it.kind !== "text" || it.h >= 40); // skip nav links, one-line labels
+      const room = contentRight - (it.x + it.w);
+      if (big && room > 8 && it.x < contentRight) it.boxW = contentRight - it.x;
+    });
+  }
+
   items.sort((a, b) => a.y - b.y || a.x - b.x);
   return items;
 }
@@ -193,7 +207,7 @@ export function PortfolioPreloader({
   useEffect(() => {
     if (skip) return;
     const run = () => { if (!frozen.current) setItems(measurePage()); };
-    const ts = [250, 700, 1300, 2000].map((t) => window.setTimeout(run, t));
+    const ts = [250, 700, 1300, 2000, 2800].map((t) => window.setTimeout(run, t));
     window.addEventListener("resize", run);
     window.addEventListener("load", run);
     return () => { ts.forEach(clearTimeout); window.removeEventListener("resize", run); window.removeEventListener("load", run); };
@@ -308,7 +322,7 @@ export function PortfolioPreloader({
         <span className="pl-note" style={{ right: 18, bottom: 16 }}>issue 01 · {Math.round(col ? col.r - col.l : 0)}px column</span>
 
         {items.map((it, i) => {
-          const on = progress >= 4 + (i / n) * 54;
+          const on = progress >= 4 + (i / n) * (BOX_SPAN - 4);
           const showLabel = it.w >= 56 && it.h >= 14;
           const showDim = it.kind === "text" && it.w >= 300 && it.h >= 20;
           const p = it.pad ?? { l: 0, t: 0, r: 0 };
@@ -316,7 +330,7 @@ export function PortfolioPreloader({
             <div key={`${i}-${it.label}`}>
               <div
                 className={`pl-box ${it.kind} ${on ? "on" : ""}`}
-                style={{ left: it.x, top: it.y, width: it.w, height: it.h, ["--r" as string]: it.radius ?? "0px" }}
+                style={{ left: it.x, top: it.y, width: it.boxW ?? it.w, height: it.h, ["--r" as string]: it.radius ?? "0px" }}
               >
                 <div className="fill" />
                 {it.kind === "media" && (
@@ -335,8 +349,8 @@ export function PortfolioPreloader({
                 )}
               </div>
               {showDim && (
-                <div className={`pl-dim ${on ? "on" : ""}`} style={{ left: it.x, top: it.y + it.h + 7, width: it.w }}>
-                  <span className="pl-chip">{Math.round(it.w)}</span>
+                <div className={`pl-dim ${on ? "on" : ""}`} style={{ left: it.x, top: it.y + it.h + 7, width: it.boxW ?? it.w }}>
+                  <span className="pl-chip">{Math.round(it.boxW ?? it.w)}</span>
                 </div>
               )}
             </div>
