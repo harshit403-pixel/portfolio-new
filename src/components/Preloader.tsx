@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState, type CSSProperties } from "react";
+import { useEffect, useLayoutEffect, useMemo, useRef, useState, type CSSProperties } from "react";
 import "./Preloader.css";
 
 /**
@@ -187,6 +187,7 @@ export function PortfolioPreloader({
   const [phase, setPhase] = useState<"load" | "wipe" | "done">(skip ? "done" : "load");
   const [items, setItems] = useState<Item[]>([]);
   const frozen = useRef(false);
+  const unlock = useRef<() => void>(() => {});
 
   /* measure the real page a few times while it settles (fonts, framer-motion intro…) */
   useEffect(() => {
@@ -200,11 +201,34 @@ export function PortfolioPreloader({
 
   useEffect(() => { frozen.current = progress >= TEXT_AT - 4; }, [progress]);
 
+  /* hide the scrollbar BEFORE the first paint (layout effect) so it never flashes.
+     We keep its width (no overflow:hidden) and only make it invisible => no sideways layout shift. */
+  useLayoutEffect(() => {
+    if (skip) return;
+    const sb = document.createElement("style");
+    sb.setAttribute("data-pl-scrollbar", "");
+    sb.textContent =
+      `html{scrollbar-color:${backgroundColor} ${backgroundColor} !important}` +
+      "html::-webkit-scrollbar-thumb,html::-webkit-scrollbar-track,html::-webkit-scrollbar-corner," +
+      "body::-webkit-scrollbar-thumb,body::-webkit-scrollbar-track,body::-webkit-scrollbar-corner" +
+      `{background:${backgroundColor} !important;border-color:${backgroundColor} !important;box-shadow:none !important}`;
+    document.head.appendChild(sb);
+    const toTop = () => { if (window.scrollY !== 0) window.scrollTo(0, 0); };
+    window.addEventListener("scroll", toTop);
+    unlock.current = () => {
+      sb.remove();
+      window.removeEventListener("scroll", toTop);
+      unlock.current = () => {};
+    };
+    return () => unlock.current();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [skip]);
+
   /* progress driver — never hits 100 before the page has really loaded */
   useEffect(() => {
     if (skip) { finish.current(); return; }
 
-    // lock scrolling WITHOUT touching overflow (that would shift the layout by the scrollbar width)
+    // swallow wheel / touch / keys so nothing (Lenis included) can scroll underneath
     const stop = (e: Event) => { e.preventDefault(); e.stopPropagation(); };
     const keys = (e: KeyboardEvent) => {
       if ([" ", "ArrowUp", "ArrowDown", "PageUp", "PageDown", "Home", "End"].includes(e.key)) e.preventDefault();
@@ -238,6 +262,7 @@ export function PortfolioPreloader({
       window.removeEventListener("touchmove", stop, true);
       window.removeEventListener("keydown", keys, true);
     };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [skip, duration]);
 
   /* after the wipe: unmount + notify */
@@ -245,6 +270,7 @@ export function PortfolioPreloader({
     if (phase !== "wipe") return;
     const t = setTimeout(() => {
       if (oncePerSession) { try { sessionStorage.setItem("pl-seen", "1"); } catch { /* ignore */ } }
+      unlock.current();
       setPhase("done");
       finish.current();
     }, WIPE_MS + 150);
