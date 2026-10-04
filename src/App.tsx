@@ -33,6 +33,7 @@ import { NotFoundSign } from "@/components/NotFoundSign";
 import { Analytics } from "@vercel/analytics/react";
 import CursorGuide from "./components/CursorGuide";
 import  Preloader  from "./components/Preloader";
+import BottomBlur from "./components/BottomBlur";
 
 /* ============================================================
    VALID PORTFOLIO ROUTES
@@ -367,6 +368,7 @@ onDone={() => setLoading(false)}
             <ScrollToTop />
 
             <AppContent />
+            <BottomBlur/>
           </BrowserRouter>
         </VisitorProvider>
       </LenisProvider>

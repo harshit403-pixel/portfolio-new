@@ -1,0 +1,34 @@
+.bottom-blur {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  height: 130px;
+
+  z-index: 9990;
+  pointer-events: none;
+
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(5px);
+
+  mask-image: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgb(219, 12, 12) 100%
+  );
+
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgb(8, 8, 8) 100%
+  );
+}
+
+@media (max-width: 768px) {
+  .bottom-blur {
+    height: 110px;
+    backdrop-filter: blur(3px);
+    -webkit-backdrop-filter: blur(5px);
+  }
+}
