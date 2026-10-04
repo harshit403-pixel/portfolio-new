@@ -1,0 +1,142 @@
+.pl-root {
+  --pl-bg: #0a0a0a;
+  --pl-ink: #fff;
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  pointer-events: all;
+  overflow: hidden;
+  color: var(--pl-ink);
+  
+}
+
+.pl-root.pl-wipe { pointer-events: none; }
+
+
+/* ---------- the dark sheet (this is what wipes away) ---------- */
+.pl-sheet {
+
+  position: absolute;
+
+  inset: 0;
+  background-color: var(--pl-bg);
+  background-image:
+    linear-gradient(color-mix(in srgb, var(--pl-ink) 7%, transparent) 1px, transparent 1px),
+    linear-gradient(90deg, color-mix(in srgb, var(--pl-ink) 7%, transparent) 1px, transparent 1px),
+    linear-gradient(color-mix(in srgb, var(--pl-ink) 3.5%, transparent) 1px, transparent 1px),
+    linear-gradient(90deg, color-mix(in srgb, var(--pl-ink) 3.5%, transparent) 1px, transparent 1px);
+  background-size: 96px 96px, 96px 96px, 24px 24px, 24px 24px;
+  clip-path: inset(0 0 0 0);
+  transition: clip-path 1.05s cubic-bezier(0.76, 0, 0.24, 1);
+}
+.pl-wipe .pl-sheet { clip-path: inset(100% 0 0 0); }
+@keyframes pl-fade-in { from { opacity: 0; } to { opacity: 1; } }
+
+/* light line that rides the wipe */
+.pl-edge {
+  position: absolute; left: 0; right: 0; top: 0; height: 1px;
+  opacity: 0;
+  background: linear-gradient(90deg, transparent, color-mix(in srgb, var(--pl-ink) 85%, transparent) 30%, color-mix(in srgb, var(--pl-ink) 85%, transparent) 70%, transparent);
+  box-shadow: 0 0 18px 1px color-mix(in srgb, var(--pl-ink) 40%, transparent);
+  transition: top 1.05s cubic-bezier(0.76, 0, 0.24, 1), opacity 0.2s linear;
+}
+.pl-wipe .pl-edge { top: 100%; opacity: 1; }
+
+.pl-guide-v {
+  position: absolute; top: 0; bottom: 0; width: 0;
+  border-left: 1px dashed color-mix(in srgb, var(--pl-ink) 28%, transparent);
+}
+
+.pl-note {
+  position: absolute;
+  font: 400 10px/1 ui-monospace, "JetBrains Mono", monospace;
+  letter-spacing: 0.08em;
+  color: color-mix(in srgb, var(--pl-ink) 45%, transparent);
+  white-space: nowrap;
+}
+
+/* ---------- labels ---------- */
+.pl-chip {
+  position: absolute;
+  background: var(--pl-ink);
+  color: var(--pl-bg);
+  font: 700 8px/1 ui-monospace, "JetBrains Mono", monospace;
+  letter-spacing: 0.06em;
+  padding: 3px 5px;
+  border-radius: 1px;
+  white-space: nowrap;
+  text-transform: uppercase;
+}
+
+/* ---------- wire boxes (positioned over the REAL elements) ---------- */
+.pl-box {
+  position: absolute;
+  opacity: 0;
+  clip-path: inset(0 100% 0 0);
+  transition:
+    opacity 0.25s linear,
+    clip-path 0.55s cubic-bezier(0.2, 0.7, 0.2, 1),
+    left 0.3s ease, top 0.3s ease, width 0.3s ease, height 0.3s ease;
+}
+.pl-box.on { opacity: 1; clip-path: inset(0 0 0 0); }
+
+.pl-box .fill {
+  position: absolute; inset: 0;
+  border: 1px solid color-mix(in srgb, var(--pl-ink) 70%, transparent);
+  border-radius: var(--r, 0);
+  background-image: repeating-linear-gradient(135deg, color-mix(in srgb, var(--pl-ink) 20%, transparent) 0 1px, transparent 1px 5px);
+  transition: opacity 0.45s ease;
+}
+.pl-box.btn .fill,
+.pl-box.card .fill { border-style: dashed; background-image: none; }
+.pl-box.media .fill { background-image: none; }
+
+.pl-box .cross {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  transition: opacity 0.45s ease;
+}
+.pl-box .cross path {
+  fill: none; stroke: color-mix(in srgb, var(--pl-ink) 55%, transparent); stroke-width: 1;
+}
+.pl-box .lab { left: 3px; top: 3px; transition: opacity 0.3s ease; }
+
+/* ghost copy = the real text, same font / size / position as the page beneath */
+.pl-box .ghost {
+  position: absolute;
+  opacity: 0;
+  color: color-mix(in srgb, var(--pl-ink) 90%, transparent);
+  transition: opacity 0.55s ease 0.05s;
+  overflow: hidden;
+}
+.pl-box .ghost.center { display: flex; align-items: center; justify-content: center; }
+
+/* ---------- text phase: wireframes dissolve into the page's own copy ---------- */
+.pl-text .pl-box .ghost { opacity: 1; }
+.pl-text .pl-box.text .fill,
+.pl-text .pl-box .lab,
+.pl-text .pl-dim,
+.pl-text .pl-dim.on { opacity: 0; }
+/* things that are images / cards / buttons in the real page keep a soft outline until the wipe */
+.pl-text .pl-box.media .fill,
+.pl-text .pl-box.btn .fill,
+.pl-text .pl-box.card .fill { opacity: 0.45; }
+.pl-text .pl-box.media .cross { opacity: 0.3; }
+
+/* ---------- dimension lines ---------- */
+.pl-dim {
+  position: absolute; height: 0;
+  border-top: 1px solid color-mix(in srgb, var(--pl-ink) 55%, transparent);
+  opacity: 0; transition: opacity 0.35s ease;
+}
+.pl-dim.on { opacity: 1; }
+.pl-dim::before, .pl-dim::after {
+  content: ""; position: absolute; top: -4px; width: 1px; height: 8px;
+  background: color-mix(in srgb, var(--pl-ink) 55%, transparent);
+}
+.pl-dim::before { left: 0; }
+.pl-dim::after { right: 0; }
+.pl-dim .pl-chip { left: 50%; top: -6px; transform: translateX(-50%); }
+
+@media (prefers-reduced-motion: reduce) {
+  .pl-root { display: none; }
+}

@@ -32,6 +32,7 @@ import { NotFoundSign } from "@/components/NotFoundSign";
 
 import { Analytics } from "@vercel/analytics/react";
 import CursorGuide from "./components/CursorGuide";
+import  Preloader  from "./components/Preloader";
 
 /* ============================================================
    VALID PORTFOLIO ROUTES
@@ -336,13 +337,30 @@ function AppContent() {
    APP
 ============================================================ */
 
+/* ============================================================
+   APP
+============================================================ */
+
 export function App() {
+  const [loading, setLoading] = useState(true);
+
   return (
     <ThemeProvider>
       <LenisProvider>
         <VisitorProvider>
           <BrowserRouter>
-            <CursorGuide/>
+            {/* ==================================================
+                PORTFOLIO OPENING ANIMATION
+            ================================================== */}
+
+            {loading && (
+              <Preloader
+
+onDone={() => setLoading(false)} 
+/>
+            )}
+
+            <CursorGuide />
 
             <Analytics />
 
