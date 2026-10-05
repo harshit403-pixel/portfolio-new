@@ -93,7 +93,10 @@ function MainLayout({
 
       <Contact />
 
-      <Projects isSearchable={false} />
+      <Projects
+  isSearchable={false}
+  limit={4}
+/>
 
       <Experience isDetailed={false} />
 

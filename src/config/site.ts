@@ -195,21 +195,26 @@ projects: [
     title: "LinksHub",
 
     blurb:
-      "A full-stack developer profile platform where users can create and share personalized profiles with links, analytics, QR sharing, AI-generated bios, and customizable content.",
+      "An AI-powered developer portfolio and link-in-bio platform with GitHub project import, click analytics, QR sharing, and a RAG-based assistant that answers questions about a developer's public projects.",
 
     story:
-      "LinksHub is a MERN-based platform designed to give developers a centralized place to showcase their online presence. It includes JWT authentication with HTTP-only cookies, public profiles, drag-and-drop links, link analytics, QR code sharing, AI bio generation, link preview metadata, soft delete and restore, and Linktree import.\n\nThe application combines a React frontend with an Express and Node.js backend, MongoDB for persistence, Cloudinary for media, and Gemini for AI-powered profile generation.",
+      "LinksHub goes beyond a Linktree alternative: it combines profile links, GitHub integration, project showcasing, analytics, and an AI assistant in one place. Developers get a public profile with custom themes, AI-generated bios (Gemini, with selectable tones), drag-and-drop link management, soft delete and restore, Linktree import, automatic link categorization, preview metadata, click tracking, and QR code sharing.\n\nThe AI side is built on Retrieval-Augmented Generation. Developers connect GitHub via OAuth and import repositories; Gemini generates structured project summaries, which are chunked, embedded with gemini-embedding-001, and stored in MongoDB Atlas Vector Search. Visitors can ask questions on a profile, and a LangGraph workflow retrieves only that developer's public project knowledge before Gemini generates a grounded answer along with related projects.\n\nThe stack is a React 19 and Vite frontend with TanStack Query, and a modular Express and Node.js backend with JWT authentication in HTTP-only cookies, Google OAuth, request validation, and rate limiting.",
 
     stack: [
       "React",
-      "Vite",
-      "TanStack Query",
+      "Tailwind CSS",
       "Node.js",
       "Express.js",
       "MongoDB",
-      "Cloudinary",
+      "MongoDB Atlas Vector Search",
+      "LangChain",
+      "LangGraph",
       "Gemini API",
+      "GitHub OAuth",
+      "Google OAuth",
+      "Cloudinary",
       "JWT",
+      "Docker",
     ],
 
     year: "2026",
@@ -230,20 +235,112 @@ projects: [
   },
 
   {
-    title: "RIP VS Code",
+    title: "Bidding Wars",
 
     blurb:
-      "A frontend project built around a creative developer-focused interface and interactive user experience.",
+      "A real-time online auction platform where users create auctions, bid live over WebSockets, chat in auction rooms, and pay securely, built with the MERN stack and TypeScript.",
 
     story:
-      "RIP VS Code is a frontend-focused project exploring creative interface design, interactions, animations, and modern web development techniques.\n\nThe project focuses primarily on building an engaging user experience with a strong emphasis on frontend implementation and visual interaction.",
+      "Bidding Wars is a full-stack auction marketplace where every bid is synchronized instantly across all connected users using Socket.IO instead of API polling. Each auction runs in its own Socket.IO room; bids are validated on the server (auction active, amount above the current highest bid, increment rules) before being saved and broadcast.\n\nUsers can create, edit, and delete auctions with image uploads, browse the marketplace as guests, join live auction rooms with real-time chat, and track bid history. The platform includes JWT authentication with refresh tokens, Google OAuth, email verification and OTP-based password reset (via Brevo), payment order creation and verification, and a dashboard showing active auctions, won auctions, and activity.\n\nThe frontend uses React 19, TypeScript, Redux Toolkit for global state, and TanStack Query for server state. The backend is a modular Express 5 and TypeScript API with Zod validation, Pino logging, Swagger documentation, and Docker support. Built together with Bhavya Dhanwani.",
 
     stack: [
       "React",
-      "JavaScript",
+      "TypeScript",
+      "Redux Toolkit",
+      "TanStack Query",
       "Tailwind CSS",
+      "Node.js",
+      "Express.js",
+      "MongoDB",
+      "Socket.IO",
+      "Zod",
+      "JWT",
+      "Google OAuth",
+      "ImageKit",
+      "Docker",
+    ],
+
+    year: "2026",
+
+    links: {
+      live: "https://bidding-wars-skkn.onrender.com/",
+      source: "https://github.com/harshit403-pixel/Bidding-Wars",
+    },
+
+    featured: true,
+
+    image: "/project-images/bidding-wars.png",
+    
+
+    categories: [
+      "Fullstack",
+      "Backend",
+    ],
+  },
+
+  {
+    title: "Voice RAG",
+
+    blurb:
+      "A multilingual, voice-enabled RAG search engine that turns spoken questions into streamed answers using Sarvam AI speech-to-text, FAISS vector search, and Mistral AI.",
+
+    story:
+      "Voice RAG is a complete voice-to-answer pipeline built for the HHGoa RAG challenge. A user speaks in their own language; Sarvam AI transcribes the audio (saaras:v3) and translates the query to English (mayura:v1). The query passes through input guardrails, is embedded with Mistral (mistral-embed, 1024 dimensions), and is searched against a FAISS HNSW index. Matching chunks are looked up in a SQLite metadata database, checked by a grounding guardrail, and passed to Mistral Large through LangChain, which streams the answer back to the UI over Server-Sent Events in the user's language.\n\nOn the indexing side, passages are chunked (RecursiveCharacterTextSplitter, 700 characters with 100 overlap for long passages), aligned to English, embedded, and stored alongside translations in 12 languages. The server warms its FAISS and SQLite caches on boot, and a sweep benchmark over 97,941 Hindi queries measured P50 retrieval latency of about 0.83 ms (P100 about 69.6 ms) against a 200 ms budget.\n\nThe React frontend includes a voice orb, source cards, and a live execution console that shows each pipeline step with its latency. The project is containerized with a multi-stage Dockerfile and deployed on Render.",
+
+    stack: [
+      "React",
+      "Node.js",
+      "Express.js",
+      "TypeScript",
+      "LangChain",
+      "Mistral AI",
+      "Sarvam AI",
+      "FAISS",
+      "SQLite",
+      "RAG",
+      "Speech-to-Text",
+      "Server-Sent Events",
+      "Docker",
+    ],
+
+    year: "2026",
+
+    links: {
+      live: "https://hhgoa-rag-xlt3.onrender.com/",
+      source: "https://github.com/harshit403-pixel/HHGoa-RAG",
+    },
+
+    featured: true,
+
+    image: "/project-images/voice-rag.png",
+
+    categories: [
+      "Fullstack",
+      "Backend",
+    ],
+  },
+
+  {
+    title: "RIP VS Code",
+
+    blurb:
+      "A team-built real-time collaborative coding platform with instant room creation, room-code invites, host and guest roles, and Monaco editor integration.",
+
+    story:
+      "RIPvscode is a collaborative coding platform where users create coding rooms instantly and invite teammates with a unique room code. It supports signup and login with JWT access tokens and refresh token rotation, session management, protected routes, host and guest roles, participant management (including kicking participants and closing rooms), and Socket.IO-based online participant tracking.\n\nThe frontend is built with Next.js and React, with GSAP animations, page transitions, and a Monaco Editor integration. The backend follows a Route, Controller, Service, and Repository (DAO) layering on Express and MongoDB, with Zod and Express Validator for validation and Pino for logging.\n\nBuilt as a three-person team project; my part was the backend, covering authentication and room management. Shared editing, cursor sync, and code execution are listed as planned next steps.",
+
+    stack: [
+      "Next.js",
+      "React",
+      "Tailwind CSS",
+      "Redux Toolkit",
       "GSAP",
-      "Framer Motion",
+      "Monaco Editor",
+      "Socket.IO",
+      "Node.js",
+      "Express.js",
+      "MongoDB",
+      "JWT",
     ],
 
     year: "2026",
@@ -258,6 +355,7 @@ projects: [
     image: "/project-images/rip-vscode.png",
 
     categories: [
+      "Fullstack",
       "Frontend",
     ],
   },
@@ -266,17 +364,21 @@ projects: [
     title: "DevHub",
 
     blurb:
-      "A frontend-focused developer platform built to explore modern UI design, reusable components, and interactive web experiences.",
+      "A full-stack developer social platform for sharing portfolios, projects, and technical blogs, built during a mini hackathon sprint.",
 
     story:
-      "DevHub is a frontend project focused on creating a modern developer-oriented interface. The project explores component-based architecture, responsive layouts, interactive UI elements, and modern frontend development practices.",
+      "DevHub is a MERN-stack social platform where developers create profiles, showcase projects, publish technical blogs, and discover each other. Profiles support profile and cover image uploads, bios, and skills. Developers can post projects with thumbnails, tech stack tags, and GitHub and live links, like projects, and open dynamic project detail pages.\n\nAn Explore section lets visitors search developers and projects and filter by tech stack. Authentication uses JWT with bcrypt password hashing and protected routes, and media is handled with Multer and Cloudinary. The interface uses glassmorphism styling, GSAP animations, and smooth transitions, and is fully responsive.\n\nThe frontend is deployed on Vercel and the backend on Render. Built during a Mini Hackathon Sprint.",
 
     stack: [
       "React",
-      "JavaScript",
       "Tailwind CSS",
       "GSAP",
-      "Framer Motion",
+      "React Router",
+      "Node.js",
+      "Express.js",
+      "MongoDB",
+      "Cloudinary",
+      "JWT",
     ],
 
     year: "2026",
@@ -291,6 +393,7 @@ projects: [
     image: "/project-images/devhub.png",
 
     categories: [
+      "Fullstack",
       "Frontend",
     ],
   },
@@ -299,15 +402,15 @@ projects: [
     title: "Slush",
 
     blurb:
-      "A frontend project focused on modern interface design, smooth interactions, and a polished responsive user experience.",
+      "A polished, responsive UI project focused on clean visual design and smooth animations.",
 
     story:
-      "Slush is a frontend-focused project built around modern UI development and interactive experiences. The project emphasizes responsive design, reusable components, animations, and creating a polished user interface.",
+      "Slush is a frontend-focused UI project built with HTML, CSS, and JavaScript, with GSAP and Framer Motion powering its animations and transitions. It emphasizes a clean, modern look, responsive layouts, and smooth interactions.",
 
     stack: [
-      "React",
+      "HTML",
+      "CSS",
       "JavaScript",
-      "Tailwind CSS",
       "GSAP",
       "Framer Motion",
     ],
@@ -318,7 +421,7 @@ projects: [
       live: "https://slush-xi.vercel.app/",
     },
 
-    featured: true,
+    featured: false,
 
     image: "/project-images/slush.png",
 
@@ -331,18 +434,19 @@ projects: [
     title: "DeployIt",
 
     blurb:
-      "An in-progress DevOps project exploring containerization, Kubernetes infrastructure, services, ingress, Redis, and modern deployment workflows.",
+      "An in-progress DevOps project exploring a multi-service architecture deployed with Docker and Kubernetes.",
 
     story:
-      "DeployIt is an ongoing DevOps-focused project built around containerized application deployment and Kubernetes infrastructure. It explores Docker, Docker Compose, Kubernetes workloads, services, ingress, Redis, and multi-service application architecture.\n\nThe project focuses on understanding how applications move from local development into containerized and orchestrated environments, including debugging image pulls, services, networking, Redis configuration, and ingress routing.",
+      "DeployIt is an ongoing project built around containerized, multi-service deployment. The repository is split into separate services (auth, project, sync, AI, and a file server) alongside a Next.js boilerplate and a dedicated Kubernetes configuration folder.\n\nThe project focuses on understanding how applications move from local development into containerized and orchestrated environments, including debugging image pulls, services, networking, Redis configuration, and ingress routing.",
 
     stack: [
       "Docker",
-      "Docker Compose",
       "Kubernetes",
       "Ingress",
       "Redis",
       "Node.js",
+      "Express.js",
+      "Next.js",
     ],
 
     year: "2026",
@@ -358,42 +462,6 @@ projects: [
     categories: [
       "Backend",
       "Fullstack",
-    ],
-  },
-
-  {
-    title: "Voice RAG",
-
-    blurb:
-      "A voice-enabled retrieval augmented generation system combining speech recognition, semantic retrieval, vector search, and AI-generated answers.",
-
-    story:
-      "The Voice RAG project explores a complete voice-to-answer pipeline: speech input is converted to text, relevant information is retrieved from a vector database, and an AI model generates the final response.\n\nThe project was developed as part of a voice-enabled RAG challenge and involved working with speech-to-text systems, document chunking, embeddings, vector databases, LangChain, and modern React animation techniques.",
-
-    stack: [
-      "React",
-      "LangChain",
-      "Mistral AI",
-      "Vector DB",
-      "RAG",
-      "Speech-to-Text",
-      "GSAP",
-      "Framer Motion",
-    ],
-
-    year: "2026",
-
-    links: {
-      live: "https://hhgoa-rag-xlt3.onrender.com/",
-    },
-
-    featured: false,
-
-    image: "/project-images/voice-rag.png",
-
-    categories: [
-      "Fullstack",
-      "Backend",
     ],
   },
 ] as Project[],

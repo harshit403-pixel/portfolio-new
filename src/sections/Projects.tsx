@@ -11,56 +11,62 @@ import {
   ExternalLink,
 } from "lucide-react";
 import { GitHubIcon } from "@/components/icons";
+import { useNavigate } from "react-router-dom";
 
 export function Projects({
   isSearchable = false,
+  limit,
 }: {
   isSearchable?: boolean;
+  limit?: number;
 }) {
+  const navigate = useNavigate();
   const [projectTab, setProjectTab] = useState<string>("All");
   const [searchQuery, setSearchQuery] = useState("");
   const [activeProject, setActiveProject] = useState<Project | null>(
     null
   );
 
-  const displayedProjects = useMemo(() => {
-    return site.projects.filter((p) => {
-      // Category filter
-      if (
-        projectTab === "Frontend" &&
-        !p.categories?.includes("Frontend")
-      ) {
-        return false;
-      }
+const displayedProjects = useMemo(() => {
+  const filtered = site.projects.filter((p) => {
+    if (
+      projectTab === "Frontend" &&
+      !p.categories?.includes("Frontend")
+    ) {
+      return false;
+    }
 
-      if (
-        projectTab === "Backend" &&
-        !p.categories?.includes("Backend")
-      ) {
-        return false;
-      }
+    if (
+      projectTab === "Backend" &&
+      !p.categories?.includes("Backend")
+    ) {
+      return false;
+    }
 
-      if (
-        projectTab === "Fullstack" &&
-        !p.categories?.includes("Fullstack")
-      ) {
-        return false;
-      }
+    if (
+      projectTab === "Fullstack" &&
+      !p.categories?.includes("Fullstack")
+    ) {
+      return false;
+    }
 
-      // Search filter
-      if (isSearchable && searchQuery) {
-        const q = searchQuery.toLowerCase();
+    if (isSearchable && searchQuery) {
+      const q = searchQuery.toLowerCase();
 
-        return (
-          p.title.toLowerCase().includes(q) ||
-          p.blurb.toLowerCase().includes(q) ||
-          p.stack.some((t) => t.toLowerCase().includes(q))
-        );
-      }
+      return (
+        p.title.toLowerCase().includes(q) ||
+        p.blurb.toLowerCase().includes(q) ||
+        p.stack.some((t) =>
+          t.toLowerCase().includes(q)
+        )
+      );
+    }
 
-      return true;
-    });
-  }, [projectTab, searchQuery, isSearchable]);
+    return true;
+  });
+
+  return limit ? filtered.slice(0, limit) : filtered;
+}, [projectTab, searchQuery, isSearchable, limit]);
 
   /*
    * Close modal with Escape
@@ -186,6 +192,21 @@ export function Projects({
               ))}
             </AnimatePresence>
           </div>
+          {limit && (
+  <div className="mt-8 flex justify-center">
+    <button
+      type="button"
+      onClick={() => navigate("/projects")}
+      className="group inline-flex cursor-pointer items-center gap-2 rounded-lg border border-[var(--line)] bg-[var(--chip)] px-5 py-2.5 text-[12px] font-medium text-[var(--fg)] transition-all duration-200 hover:bg-[var(--hover)]"
+    >
+      View All Projects
+
+      <ArrowUpRight
+        className="size-3.5 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+      />
+    </button>
+  </div>
+)}
 
           {displayedProjects.length === 0 && (
             <div className="py-12 text-center font-mono text-[13.5px] text-[var(--muted)]">
@@ -194,6 +215,7 @@ export function Projects({
           )}
         </Shell>
       </div>
+      
 
       {/* ============================================================
           PROJECT DETAIL MODAL
