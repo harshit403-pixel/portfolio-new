@@ -5,6 +5,7 @@ import { site } from "@/config/site";
 import { MapPin, Search, RotateCw, Eye } from "lucide-react";
 import { useVisitor } from "@/context/VisitorContext";
 import { HireMeWeb } from "@/components/HireMeWeb";
+import { FootballBanner } from "@/components/football/FootballBanner";
 
 import { FloatingMessage } from "@/components/FloatingMessage";
 import FolderComponent from "@/components/FolderComponent";
@@ -75,20 +76,9 @@ data-cursor-label="click to view memories"
   className="absolute right-[12%] top-[700%] z-30 hidden md:block"
   avatarBorderColor="border-blue-800"
 />
-      {/* Cover Banner */}
+      {/* Cover Banner — now a pixel football game (demo in the banner, "Play me" opens the modal) */}
       <Shell className="">
-        <div className="relative h-36 overflow-hidden  bg-neutral-950 sm:h-44 border border-[var(--line)]">
-          <img
-            src={site.bannerImage}
-            alt="Starry Night banner"
-            loading="eager"
-            decoding="async"
-            className="w-full h-full object-cover object-center opacity-90 transition-opacity duration-300 hover:opacity-100"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-[var(--bg)]/40 to-transparent" />
-          <div className="absolute inset-0 opacity-20 [background-image:repeating-linear-gradient(0deg,rgba(255,255,255,0.05)_0,rgba(255,255,255,0.05)_1px,transparent_1px,transparent_5px)]" />
-          <div className="absolute inset-0 [background-image:repeating-linear-gradient(90deg,rgba(0,0,0,0.12)_0,rgba(0,0,0,0.12)_1px,transparent_1px,transparent_28px)] opacity-30" />
-        </div>
+        <FootballBanner />
       </Shell>
 
       {/* Profile Avatar & Identity */}
