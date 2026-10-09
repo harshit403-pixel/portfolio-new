@@ -48,6 +48,10 @@ export function Nav({
       path: "/projects",
     },
     {
+      label: "Experiments",
+      path: "/experiments",
+    },
+    {
       label: "Experience",
       path: "/experience",
     },

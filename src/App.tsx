@@ -13,7 +13,6 @@ import { Nav } from "@/components/nav";
 import { Footer } from "@/components/footer";
 import { SideIndex } from "@/components/SideIndex";
 import { CommandPalette } from "@/components/command-palette";
-import { PixelCursor } from "./components/PixelCursor";
 import { LenisProvider } from "./components/LenisProvider";
 
 import { Hero } from "@/sections/Hero";
@@ -28,16 +27,15 @@ import { GithubActivity } from "@/sections/GithubActivity";
 
 import { WritingPage } from "@/pages/WritingPage";
 import { ContactPage } from "./pages/ContactPage";
+import { ExperimentsPage } from "@/pages/ExperimentsPage";
+import { MemoryBoxPage } from "@/pages/experiments/MemoryBoxPage";
+import VendingMachine from "./pages/experiments/VendingMachine";
 import { NotFoundSign } from "@/components/NotFoundSign";
 
 import { Analytics } from "@vercel/analytics/react";
 import CursorGuide from "./components/CursorGuide";
-import  Preloader  from "./components/Preloader";
+import Preloader from "./components/Preloader";
 import BottomBlur from "./components/BottomBlur";
-
-/* ============================================================
-   VALID PORTFOLIO ROUTES
-============================================================ */
 
 const VALID_ROUTES = [
   "/",
@@ -45,11 +43,10 @@ const VALID_ROUTES = [
   "/experience",
   "/contact",
   "/writing",
+  "/experiments",
+  "/experiments/memory-box",
+  "/experiments/vending-machine",
 ];
-
-/* ============================================================
-   SCROLL TO TOP
-============================================================ */
 
 function ScrollToTop() {
   const { pathname, hash } = useLocation();
@@ -61,9 +58,7 @@ function ScrollToTop() {
 
       if (element) {
         setTimeout(() => {
-          element.scrollIntoView({
-            behavior: "auto",
-          });
+          element.scrollIntoView({ behavior: "auto" });
         }, 100);
 
         return;
@@ -75,10 +70,6 @@ function ScrollToTop() {
 
   return null;
 }
-
-/* ============================================================
-   MAIN HOME PAGE
-============================================================ */
 
 function MainLayout({
   onOpenPalette,
@@ -93,10 +84,7 @@ function MainLayout({
 
       <Contact />
 
-      <Projects
-  isSearchable={false}
-  limit={4}
-/>
+      <Projects isSearchable={false} limit={4} />
 
       <Experience isDetailed={false} />
 
@@ -111,239 +99,138 @@ function MainLayout({
   );
 }
 
-/* ============================================================
-   404 PAGE
-============================================================ */
-
 function NotFoundPage() {
   return (
-    <div
-      className="
-        relative
-        min-h-screen
-        overflow-hidden
-        bg-[var(--bg)]
-        text-[var(--fg)]
-      "
-    >
+    <div className="relative min-h-screen overflow-hidden bg-[var(--bg)] text-[var(--fg)]">
       <NotFoundSign />
     </div>
   );
 }
 
-/* ============================================================
-   APP CONTENT
-============================================================ */
-
 function AppContent() {
-  const [paletteOpen, setPaletteOpen] =
-    useState(false);
-
+  const [paletteOpen, setPaletteOpen] = useState(false);
   const { pathname } = useLocation();
 
-  /*
-   * Anything that isn't one of our actual
-   * portfolio routes is treated as a 404.
-   */
-  const is404 =
-    !VALID_ROUTES.includes(pathname);
+  // Only individual experiment pages use the standalone layout.
+  // The /experiments gallery keeps the normal portfolio layout.
+  const isStandaloneExperiment =
+    pathname.startsWith("/experiments/");
 
-  /* ==========================================================
-     COMMAND PALETTE
-  ========================================================== */
+  const is404 = !VALID_ROUTES.includes(pathname);
 
   useEffect(() => {
-    const handleKeyDown = (
-      e: KeyboardEvent
-    ) => {
+    const handleKeyDown = (e: KeyboardEvent) => {
       if (
         (e.metaKey || e.ctrlKey) &&
         e.key.toLowerCase() === "k"
       ) {
         e.preventDefault();
 
-        setPaletteOpen(
-          (prev) => !prev
-        );
+        if (!isStandaloneExperiment && !is404) {
+          setPaletteOpen((prev) => !prev);
+        }
       }
     };
 
-    window.addEventListener(
-      "keydown",
-      handleKeyDown
-    );
+    window.addEventListener("keydown", handleKeyDown);
 
     return () =>
-      window.removeEventListener(
-        "keydown",
-        handleKeyDown
-      );
-  }, []);
+      window.removeEventListener("keydown", handleKeyDown);
+  }, [isStandaloneExperiment, is404]);
+
+  useEffect(() => {
+    if (isStandaloneExperiment || is404) {
+      setPaletteOpen(false);
+    }
+  }, [isStandaloneExperiment, is404]);
 
   return (
     <div
-      className="
-        relative
-        min-h-screen
-        bg-[var(--bg)]
-        font-sans
-        text-[var(--fg)]
-        antialiased
-        transition-colors
-        duration-300
-      "
+      className={
+        isStandaloneExperiment
+          ? "relative min-h-screen bg-[var(--bg)] text-[var(--fg)]"
+          : "relative min-h-screen bg-[var(--bg)] font-sans text-[var(--fg)] antialiased transition-colors duration-300"
+      }
     >
-      {/* ======================================================
-          NORMAL PORTFOLIO NAVIGATION
-
-          Completely hidden on 404.
-      ====================================================== */}
-
-      {!is404 && (
-        <Nav
-          onOpenPalette={() =>
-            setPaletteOpen(true)
-          }
-        />
+      {!is404 && !isStandaloneExperiment && (
+        <Nav onOpenPalette={() => setPaletteOpen(true)} />
       )}
 
-      {/* ======================================================
-          SIDE INDEX
+      {!is404 && !isStandaloneExperiment && <SideIndex />}
 
-          Completely hidden on 404.
-      ====================================================== */}
-
-      {!is404 && <SideIndex />}
-
-      {/* ======================================================
-          PAGE CONTENT
-      ====================================================== */}
-
-      <main
-        className={
-          is404
-            ? "relative"
-            : "relative z-10"
-        }
-      >
+      <main className={is404 ? "relative" : "relative z-10"}>
         <Routes>
-
-          {/* ====================================================
-              HOME
-          ==================================================== */}
-
           <Route
             path="/"
             element={
               <MainLayout
-                onOpenPalette={() =>
-                  setPaletteOpen(true)
-                }
+                onOpenPalette={() => setPaletteOpen(true)}
               />
             }
           />
-
-          {/* ====================================================
-              PROJECTS
-          ==================================================== */}
 
           <Route
             path="/projects"
-            element={
-              <Projects
-                isSearchable={true}
-              />
-            }
+            element={<Projects isSearchable={true} />}
           />
-
-          {/* ====================================================
-              EXPERIENCE
-          ==================================================== */}
 
           <Route
             path="/experience"
             element={
               <>
-                <Experience
-                  isDetailed={true}
-                />
-
+                <Experience isDetailed={true} />
                 <OpenSource />
               </>
             }
           />
 
-          {/* ====================================================
-              CONTACT
-          ==================================================== */}
+          <Route path="/contact" element={<ContactPage />} />
+
+          <Route path="/writing" element={<WritingPage />} />
 
           <Route
-            path="/contact"
-            element={
-              <ContactPage />
-            }
+            path="/experiments"
+            element={<ExperimentsPage />}
           />
-
-          {/* ====================================================
-              WRITING
-          ==================================================== */}
 
           <Route
-            path="/writing"
-            element={
-              <WritingPage />
-            }
+            path="/experiments/memory-box"
+            element={<MemoryBoxPage />}
           />
-
-          {/* ====================================================
-              REAL 404
-
-              Any unknown URL comes here.
-          ==================================================== */}
 
           <Route
-            path="*"
-            element={
-              <NotFoundPage />
-            }
+            path="/experiments/vending-machine"
+            element={<VendingMachine />}
+          />
+          <Route
+            path="/experiments/404"
+            element={<NotFoundPage />}
           />
 
+          <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </main>
 
-      {/* ======================================================
-          FOOTER
+      {!is404 && !isStandaloneExperiment && <Footer />}
 
-          Completely hidden on 404.
-      ====================================================== */}
-
-      {!is404 && <Footer />}
-
-      {/* ======================================================
-          COMMAND PALETTE
-
-          Also hidden on 404.
-      ====================================================== */}
-
-      {!is404 && (
+      {!is404 && !isStandaloneExperiment && (
         <CommandPalette
           open={paletteOpen}
-          onClose={() =>
-            setPaletteOpen(false)
-          }
+          onClose={() => setPaletteOpen(false)}
         />
       )}
     </div>
   );
 }
 
-/* ============================================================
-   APP
-============================================================ */
+function RouteEffects() {
+  const { pathname } = useLocation();
 
-/* ============================================================
-   APP
-============================================================ */
+  const isStandaloneExperiment =
+    pathname.startsWith("/experiments/");
+
+  return isStandaloneExperiment ? null : <BottomBlur />;
+}
 
 export function App() {
   const [loading, setLoading] = useState(true);
@@ -353,15 +240,8 @@ export function App() {
       <LenisProvider>
         <VisitorProvider>
           <BrowserRouter>
-            {/* ==================================================
-                PORTFOLIO OPENING ANIMATION
-            ================================================== */}
-
             {loading && (
-              <Preloader
-
-onDone={() => setLoading(false)} 
-/>
+              <Preloader onDone={() => setLoading(false)} />
             )}
 
             <CursorGuide />
@@ -371,7 +251,8 @@ onDone={() => setLoading(false)}
             <ScrollToTop />
 
             <AppContent />
-            <BottomBlur/>
+
+            <RouteEffects />
           </BrowserRouter>
         </VisitorProvider>
       </LenisProvider>

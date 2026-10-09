@@ -16,7 +16,8 @@ import {
   BookOpen,
   Mail,
   Briefcase,
-  GitMerge
+  GitMerge,
+  FlaskConical
 } from "lucide-react";
 import { GitHubIcon } from "./icons";
 
@@ -101,6 +102,17 @@ export function CommandPalette({
       icon: <Globe size={16} />,
       action: () => {
         navigate("/projects");
+        handleClose();
+      },
+    },
+    {
+      id: "nav-experiments",
+      category: "navigation",
+      title: "Go to Experiments",
+      subtitle: "Interactive demos, prototypes, and creative builds",
+      icon: <FlaskConical size={16} />,
+      action: () => {
+        navigate("/experiments");
         handleClose();
       },
     },
