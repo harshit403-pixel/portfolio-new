@@ -814,7 +814,7 @@ export default function MemoryBoard(): JSX.Element {
     /* ------------------------------ Cleanup ------------------------------ */
 
     return () => {
-      disposed = true;
+      disposed = true; 
       if (startTimeout) clearTimeout(startTimeout);
       cancelAnimationFrame(rafId);
       cleanups.forEach((fn) => fn());
