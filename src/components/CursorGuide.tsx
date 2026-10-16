@@ -9,6 +9,8 @@ import { useEffect, useState } from "react";
 const DEFAULT_LABEL = "YOU";
 
 const CursorGuide = () => {
+  // Only show on devices with a real mouse/trackpad (hidden on phones & tablets)
+  const [hasMouse, setHasMouse] = useState(false);
   const [label, setLabel] = useState(DEFAULT_LABEL);
   const [visible, setVisible] = useState(false);
 
@@ -28,6 +30,17 @@ const CursorGuide = () => {
   });
 
   useEffect(() => {
+    const mq = window.matchMedia("(hover: hover) and (pointer: fine)");
+    setHasMouse(mq.matches);
+
+    const onChange = (e: MediaQueryListEvent) => setHasMouse(e.matches);
+    mq.addEventListener("change", onChange);
+    return () => mq.removeEventListener("change", onChange);
+  }, []);
+
+  useEffect(() => {
+    if (!hasMouse) return;
+
     const handleMouseMove = (e: MouseEvent) => {
       mouseX.set(e.clientX + 14);
       mouseY.set(e.clientY + 18);
@@ -71,7 +84,9 @@ const CursorGuide = () => {
         handleMouseLeave
       );
     };
-  }, [mouseX, mouseY]);
+  }, [mouseX, mouseY, hasMouse]);
+
+  if (!hasMouse) return null;
 
   return (
     <motion.div
