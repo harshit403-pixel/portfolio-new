@@ -415,16 +415,16 @@ export default function MemoryBoard(): JSX.Element {
 
     const DEMO: DemoItem[] = [
       { caption: "heaven", img: "/assets/photos/photo2.webp", audio: "/assets/music/mcsher.mp3" },
-      { caption: "mountains", img: "/assets/photos/photo3.jpg", audio: "/assets/music/mountains.mp3" },
-      { caption: "alter ego", img: "/assets/photos/photo4.jpg", audio: "/assets/music/billieJean.mp3" },
+      { caption: "mountains", img: "/assets/photos/photo3.webp", audio: "/assets/music/mountains.mp3" },
+      { caption: "alter ego", img: "/assets/photos/photo4.webp", audio: "/assets/music/billieJean.mp3" },
       { caption: "divine", img: "/assets/photos/photo5.webp", audio: "/assets/music/raghunath.mp3" },
-      { caption: "still there", img: "/assets/photos/photo6.jpg", audio: "/assets/music/blindingLights.mp3" },
-      { caption: "sunset", img: "/assets/photos/photo8.jpg", audio: "/assets/music/nightchanges.mp3" },
-      { caption: "notes & harmony", img: "/assets/photos/photo10.jpg", audio: "/assets/music/loveme.mp3" },
-      { caption: "In love", img: "/assets/photos/photo12.jpg", audio: "/assets/music/dtmf.mp3" },
-      { caption: "Yes sir", img: "/assets/photos/photo13.jpg", audio: "/assets/music/football.mp3" },
-      { caption: "UNO", img: "/assets/photos/photo14.jpg", audio: "/assets/music/getLucky.mp3" },
-      { caption: "SPIDERMAN", img: "/assets/photos/photo15.jpg", audio: "/assets/music/spiderMan.mp3" },
+      { caption: "still there", img: "/assets/photos/photo6.webp", audio: "/assets/music/blindingLights.mp3" },
+      { caption: "sunset", img: "/assets/photos/photo8.webp", audio: "/assets/music/nightchanges.mp3" },
+      { caption: "notes & harmony", img: "/assets/photos/photo10.webp", audio: "/assets/music/loveme.mp3" },
+      { caption: "In love", img: "/assets/photos/photo12.webp", audio: "/assets/music/dtmf.mp3" },
+      { caption: "Yes sir", img: "/assets/photos/photo13.webp", audio: "/assets/music/football.mp3" },
+      { caption: "UNO", img: "/assets/photos/photo14.webp", audio: "/assets/music/getLucky.mp3" },
+      { caption: "SPIDERMAN", img: "/assets/photos/photo15.webp", audio: "/assets/music/spiderMan.mp3" },
     ];
 
     function escapeHtml(s: string) {

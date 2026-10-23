@@ -560,7 +560,7 @@ const Card = ({
 }) => {
 const memories = [
   {
-    image: "/assets/photos/photo4.jpg",
+    image: "/assets/photos/photo4.webp",
     title: "summer",
     date: "JUN 24",
   },
