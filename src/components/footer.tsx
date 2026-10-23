@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Shell, GapBand, SectionHeader } from "@/components/Layout";
 import { site } from "@/config/site";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Fingerprint } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 const QUOTES = [
@@ -27,9 +27,22 @@ const QUOTES = [
   },
 ];
 
+type Thumbprint = {
+  id: number;
+  x: number;
+  y: number;
+  rotation: number;
+};
+
+const THUMBPRINT_URL = "https://leave-your-thumbprint.vercel.app/";
+
 export function Footer() {
   const [localTime, setLocalTime] = useState<string>("");
   const [quoteIndex, setQuoteIndex] = useState(0);
+  const [thumbprints, setThumbprints] = useState<Thumbprint[]>([]);
+  const thumbprintArea = useRef<HTMLDivElement>(null);
+  const lastThumbprint = useRef<{ x: number; y: number } | null>(null);
+  const thumbprintTimers = useRef<ReturnType<typeof setTimeout>[]>([]);
 
   useEffect(() => {
     const updateTime = () => {
@@ -48,6 +61,33 @@ export function Footer() {
     const interval = setInterval(updateTime, 1000);
     return () => clearInterval(interval);
   }, []);
+
+  useEffect(() => {
+    return () => thumbprintTimers.current.forEach(clearTimeout);
+  }, []);
+
+  const leaveThumbprint = (event: React.PointerEvent<HTMLDivElement>) => {
+    if (event.pointerType !== "mouse" || !thumbprintArea.current) return;
+
+    const bounds = thumbprintArea.current.getBoundingClientRect();
+    const x = event.clientX - bounds.left;
+    const y = event.clientY - bounds.top;
+    const last = lastThumbprint.current;
+
+    if (last && Math.hypot(x - last.x, y - last.y) < 44) return;
+
+    lastThumbprint.current = { x, y };
+    const print = { id: Date.now() + Math.random(), x, y, rotation: Math.random() * 28 - 14 };
+    setThumbprints((prints) => [
+      ...prints.slice(-14),
+      print,
+    ]);
+    thumbprintTimers.current.push(
+      setTimeout(() => {
+        setThumbprints((prints) => prints.filter(({ id }) => id !== print.id));
+      }, 1500),
+    );
+  };
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -73,6 +113,51 @@ export function Footer() {
           <ArrowRight className="size-3.5 transition-transform duration-200 group-hover:translate-x-1" />
         </a>
       </Shell>
+
+      {/* Thumbprint invitation */}
+      <div className="w-full border-t border-[var(--line)]">
+        <Shell className="px-6 sm:px-8">
+          <div
+            ref={thumbprintArea}
+            onPointerMove={leaveThumbprint}
+            onPointerLeave={() => {
+              lastThumbprint.current = null;
+            }}
+            className="relative isolate overflow-hidden py-14 text-center"
+          >
+            <div className="pointer-events-none absolute inset-0 -z-10 overflow-hidden" aria-hidden="true">
+              <AnimatePresence>
+                {thumbprints.map((print) => (
+                  <motion.div
+                    key={print.id}
+                    className="absolute size-8 text-sky-400"
+                    style={{ left: print.x, top: print.y, marginLeft: -16, marginTop: -16 }}
+                    initial={{ opacity: 0, scale: 0.72, rotate: print.rotation - 6 }}
+                    animate={{ opacity: 0.34, scale: 1, rotate: print.rotation }}
+                    exit={{ opacity: 0, scale: 1.08, y: -7 }}
+                    transition={{ duration: 0.55, ease: "easeOut" }}
+                  >
+                    <Fingerprint className="size-full" strokeWidth={0.85} />
+                  </motion.div>
+                ))}
+              </AnimatePresence>
+            </div>
+
+            <div className="mt-4 flex justify-center">
+              <a
+                href={THUMBPRINT_URL}
+                target="_blank"
+                rel="noreferrer"
+                className="group inline-flex items-center gap-2 rounded-lg border border-[var(--line)] bg-[var(--bg)] px-4 py-2 text-[13px] font-semibold text-[var(--fg)] transition-colors duration-200 hover:border-sky-400/60 hover:text-sky-300"
+              >
+                <Fingerprint className="size-3.5" />
+                Leave your thumbprint
+                <ArrowRight className="size-3.5 transition-transform duration-200 group-hover:translate-x-1" />
+              </a>
+            </div>
+          </div>
+        </Shell>
+      </div>
 
       {/* Quote Band */}
       <GapBand className="border-t border-[var(--line)]" />
