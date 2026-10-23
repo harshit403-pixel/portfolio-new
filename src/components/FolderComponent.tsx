@@ -565,12 +565,12 @@ const memories = [
     date: "JUN 24",
   },
   {
-    image: "/assets/photos/photo2.jpg",
+    image: "/assets/photos/photo2.webp",
     title: "good days",
     date: "AUG 24",
   },
   {
-    image: "/assets/photos/photo5.jpg",
+    image: "/assets/photos/photo5.webp",
     title: "memories",
     date: "DEC 24",
   },

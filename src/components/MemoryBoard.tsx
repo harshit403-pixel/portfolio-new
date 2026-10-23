@@ -414,10 +414,10 @@ export default function MemoryBoard(): JSX.Element {
     ];
 
     const DEMO: DemoItem[] = [
-      { caption: "heaven", img: "/assets/photos/photo2.jpg", audio: "/assets/music/mcsher.mp3" },
+      { caption: "heaven", img: "/assets/photos/photo2.webp", audio: "/assets/music/mcsher.mp3" },
       { caption: "mountains", img: "/assets/photos/photo3.jpg", audio: "/assets/music/mountains.mp3" },
       { caption: "alter ego", img: "/assets/photos/photo4.jpg", audio: "/assets/music/billieJean.mp3" },
-      { caption: "divine", img: "/assets/photos/photo5.jpg", audio: "/assets/music/raghunath.mp3" },
+      { caption: "divine", img: "/assets/photos/photo5.webp", audio: "/assets/music/raghunath.mp3" },
       { caption: "still there", img: "/assets/photos/photo6.jpg", audio: "/assets/music/blindingLights.mp3" },
       { caption: "sunset", img: "/assets/photos/photo8.jpg", audio: "/assets/music/nightchanges.mp3" },
       { caption: "notes & harmony", img: "/assets/photos/photo10.jpg", audio: "/assets/music/loveme.mp3" },
