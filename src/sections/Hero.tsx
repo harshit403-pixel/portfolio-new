@@ -50,28 +50,28 @@ data-cursor-label="click to view memories"
 
       <HireMeWeb/>
       <FloatingMessage
-  image="/profile.jpg"
+  image="/profile.webp"
   message="Have A Good Day!"
   className="absolute right-[12%] top-[30%] z-30 hidden md:block"
   avatarBorderColor="border-blue-800"
 />
 
 <FloatingMessage
-  image="/profile.jpg"
+  image="/profile.webp"
   message="Keep Exploring!"
   className="absolute left-[12%] top-[560%] z-30 hidden md:block"
   avatarBorderColor="border-blue-800"
 />
 
 <FloatingMessage
-  image="/profile.jpg"
+  image="/profile.webp"
   message="Thanks For Visiting!"
   className="absolute left-[12%] top-[1060%] z-30 hidden md:block"
   avatarBorderColor="border-blue-800"
 />
 
 <FloatingMessage
-  image="/profile.jpg"
+  image="/profile.webp"
   message="Follow On X (Twitter)"
   className="absolute right-[12%] top-[700%] z-30 hidden md:block"
   avatarBorderColor="border-blue-800"

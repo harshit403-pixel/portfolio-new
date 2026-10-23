@@ -65,8 +65,8 @@ export const site = {
   },
 
   profileImages: [
-    "/profile.jpg",
-    "/profile2.png",
+    "/profile.webp",
+    "/profile2.webp",
   ],
 
   bannerImage: "/social-banner.gif",
@@ -226,7 +226,7 @@ projects: [
 
     featured: true,
 
-    image: "/project-images/linkshub.png",
+    image: "/project-images/linkshub.webp",
 
     categories: [
       "Fullstack",
@@ -269,7 +269,7 @@ projects: [
 
     featured: true,
 
-    image: "/project-images/bidding-wars.png",
+    image: "/project-images/bidding-wars.webp",
     
 
     categories: [
@@ -312,7 +312,7 @@ projects: [
 
     featured: true,
 
-    image: "/project-images/voice-rag.png",
+    image: "/project-images/voice-rag.webp",
 
     categories: [
       "Fullstack",
@@ -352,7 +352,7 @@ projects: [
 
     featured: true,
 
-    image: "/project-images/rip-vscode.png",
+    image: "/project-images/rip-vscode.webp",
 
     categories: [
       "Fullstack",
@@ -390,7 +390,7 @@ projects: [
 
     featured: true,
 
-    image: "/project-images/devhub.png",
+    image: "/project-images/devhub.webp",
 
     categories: [
       "Fullstack",
@@ -423,7 +423,7 @@ projects: [
 
     featured: false,
 
-    image: "/project-images/slush.png",
+    image: "/project-images/slush.webp",
 
     categories: [
       "Frontend",
@@ -457,7 +457,7 @@ projects: [
 
     featured: false,
 
-    image: "/project-images/deployit.png",
+    image: "/project-images/deployit.webp",
 
     categories: [
       "Backend",
