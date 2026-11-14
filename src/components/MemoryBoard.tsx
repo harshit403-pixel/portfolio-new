@@ -224,7 +224,7 @@ interface MemoryNode {
 
 /* ---------------------------- Component ---------------------------- */
 
-export default function MemoryBoard(): JSX.Element {
+export default function MemoryBoard(): React.JSX.Element {
   const rootRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {

@@ -36,6 +36,7 @@ import { Analytics } from "@vercel/analytics/react";
 import CursorGuide from "./components/CursorGuide";
 import Preloader from "./components/Preloader";
 import BottomBlur from "./components/BottomBlur";
+import { SoundEffects } from "@/components/Sound";
 
 const VALID_ROUTES = [
   "/",
@@ -236,27 +237,29 @@ export function App() {
   const [loading, setLoading] = useState(true);
 
   return (
-    <ThemeProvider>
-      <LenisProvider>
-        <VisitorProvider>
-          <BrowserRouter>
-            {loading && (
-              <Preloader onDone={() => setLoading(false)} />
-            )}
+    <SoundEffects>
+      <ThemeProvider>
+        <LenisProvider>
+          <VisitorProvider>
+            <BrowserRouter>
+              {loading && (
+                <Preloader onDone={() => setLoading(false)} />
+              )}
 
-            <CursorGuide />
+              <CursorGuide />
 
-            <Analytics />
+              <Analytics />
 
-            <ScrollToTop />
+              <ScrollToTop />
 
-            <AppContent />
+              <AppContent />
 
-            <RouteEffects />
-          </BrowserRouter>
-        </VisitorProvider>
-      </LenisProvider>
-    </ThemeProvider>
+              <RouteEffects />
+            </BrowserRouter>
+          </VisitorProvider>
+        </LenisProvider>
+      </ThemeProvider>
+    </SoundEffects>
   );
 }
 

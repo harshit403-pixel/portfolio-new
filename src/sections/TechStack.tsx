@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { Shell, SectionHeader } from "@/components/Layout";
 import { site } from "@/config/site";
 import { Icon } from "@iconify/react";
@@ -190,38 +190,28 @@ export function TechStack() {
         </div>
 
         {/* Skill Items Grid */}
-        <motion.div
-          layout
-          className="mt-6 flex flex-wrap gap-2.5"
-        >
-          <AnimatePresence mode="popLayout">
-            {filteredSkills.map((skill) => {
-              const iconName =
-                SKILL_ICONS[skill] || "lucide:code-2";
+        <div className="mt-6 flex flex-wrap gap-2.5">
+          {filteredSkills.map((skill, index) => {
+            const iconName =
+              SKILL_ICONS[skill] || "lucide:code-2";
 
-              return (
-                <motion.span
-                  key={skill}
-                  layout
-                  initial={{
-                    opacity: 0,
-                    scale: 0.9,
-                  }}
-                  animate={{
-                    opacity: 1,
-                    scale: 1,
-                  }}
-                  exit={{
-                    opacity: 0,
-                    scale: 0.9,
-                  }}
-                  transition={{
-                    duration: 0.2,
-                    type: "spring",
-                    stiffness: 300,
-                    damping: 25,
-                  }}
-                  className="
+            return (
+              <motion.span
+                key={`${activeCategory}-${skill}`}
+                initial={{
+                  opacity: 0,
+                  filter: "blur(8px)",
+                }}
+                animate={{
+                  opacity: 1,
+                  filter: "blur(0px)",
+                }}
+                transition={{
+                  duration: 0.35,
+                  delay: index * 0.03,
+                  ease: "easeOut",
+                }}
+                className="
                     flex
                     cursor-default
                     items-center
@@ -244,26 +234,25 @@ export function TechStack() {
                     shadow-xs
                     group
                   "
-                >
-                  <Icon
-                    icon={iconName}
-                    width={16}
-                    height={16}
-                    className="
+              >
+                <Icon
+                  icon={iconName}
+                  width={16}
+                  height={16}
+                  className="
                       size-4
                       shrink-0
                       transition-colors
                       group-hover:filter
                       group-hover:brightness-110
                     "
-                  />
+                />
 
-                  {skill}
-                </motion.span>
-              );
-            })}
-          </AnimatePresence>
-        </motion.div>
+                {skill}
+              </motion.span>
+            );
+          })}
+        </div>
       </Shell>
     </div>
   );
