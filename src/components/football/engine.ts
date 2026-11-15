@@ -43,6 +43,7 @@ const BALL_MAX = 7.5;
 const STEP_CD = 16; // frames between kicks
 const CD_FRAMES = 34; // frames per countdown number
 const GOAL_FRAMES = 110;
+const HOARDING_H = 14;
 
 /* ------------------------------------------------------------------ */
 /*  3x5 pixel font                                                     */
@@ -642,6 +643,7 @@ export class FootballGame {
     ctx.save();
     if (this.shake > 0) ctx.translate(Math.round((Math.random() - 0.5) * 2), Math.round((Math.random() - 0.5) * 2));
     ctx.drawImage(this.bg, 0, 0);
+    this.drawHoarding(ctx);
 
     // shadows
     ctx.fillStyle = "rgba(0,0,0,0.32)";
@@ -797,7 +799,7 @@ export class FootballGame {
     sky.forEach((c, i) => { g.fillStyle = c; g.fillRect(0, i * bandH, W, bandH); });
 
     // crowd
-    const boardY = grassTop - 7;
+    const boardY = grassTop - HOARDING_H;
     const crowdTop = Math.max(2, Math.floor(H * 0.06));
     const cols = ["#13204a", "#1a2c63", "#223a7c", "#2c4a96", "#10193a", "#1d3170"];
     const spec = ["#cbd5f5", "#ef4444", "#facc15", "#60a5fa", "#f8fafc", "#fb923c"];
@@ -822,15 +824,12 @@ export class FootballGame {
     }
 
     // ad boards
-    g.fillStyle = "#0b1224";
-    g.fillRect(0, boardY, W, 6);
-    g.fillStyle = "#1e293b";
+    g.fillStyle = "#07101f";
+    g.fillRect(0, boardY, W, HOARDING_H);
+    g.fillStyle = "#3b82f6";
     g.fillRect(0, boardY, W, 1);
-    const ad = "HARSHITR.ME";
-    const adW = textWidth(ad, 1) + 14;
-    for (let x = 6, i = 0; x < W - gd - 4; x += adW, i++) {
-      drawText(g, ad, x, boardY + 1, 1, i % 2 ? "#60a5fa" : "#facc15");
-    }
+    g.fillStyle = "#172b50";
+    g.fillRect(0, boardY + HOARDING_H - 1, W, 1);
 
     // grass
     const stripeW = 22;
@@ -883,5 +882,37 @@ export class FootballGame {
     drawGoal(1);
 
     return cv;
+  }
+
+  private drawHoarding(ctx: CanvasRenderingContext2D) {
+    const boardY = this.grassTop - HOARDING_H;
+    const left = this.gd + 2;
+    const right = this.W - this.gd - 4;
+    const width = Math.max(1, right - left);
+    const copy = "Put Your Brand Here | ";   const cycle = textWidth(copy, 1) + 8;
+    const offset = (this.frame * 0.5) % cycle;
+
+    ctx.save();
+    ctx.beginPath();
+    ctx.rect(left, boardY, width, HOARDING_H);
+    ctx.clip();
+
+    ctx.fillStyle = "#07101f";
+    ctx.fillRect(left, boardY, width, HOARDING_H);
+    for (let x = left - 44; x < right + 44; x += 44) {
+      const panel = Math.floor((x - left + 44) / 44);
+      ctx.fillStyle = panel % 2 ? "#102345" : "#132b52";
+      ctx.fillRect(x, boardY + 1, 43, HOARDING_H - 2);
+    }
+
+    for (let x = left - cycle - offset; x < right + cycle; x += cycle) {
+      drawText(ctx, copy, Math.round(x), boardY + 4, 1, "#f8fafc", "#020617");
+    }
+
+    ctx.fillStyle = "#facc15";
+    ctx.fillRect(left, boardY, width, 1);
+    ctx.fillStyle = "#172b50";
+    ctx.fillRect(left, boardY + HOARDING_H - 1, width, 1);
+    ctx.restore();
   }
 }
