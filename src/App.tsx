@@ -30,6 +30,7 @@ import { ContactPage } from "./pages/ContactPage";
 import { ExperimentsPage } from "@/pages/ExperimentsPage";
 import { MemoryBoxPage } from "@/pages/experiments/MemoryBoxPage";
 import VendingMachine from "./pages/experiments/VendingMachine";
+import HarshitTypeMotion from "./pages/experiments/HarshitTypeMotion";
 import { NotFoundSign } from "@/components/NotFoundSign";
 
 import { Analytics } from "@vercel/analytics/react";
@@ -47,6 +48,7 @@ const VALID_ROUTES = [
   "/experiments",
   "/experiments/memory-box",
   "/experiments/vending-machine",
+  "/experiments/harshit-type-motion",
 ];
 
 function ScrollToTop() {
@@ -202,6 +204,10 @@ function AppContent() {
           <Route
             path="/experiments/vending-machine"
             element={<VendingMachine />}
+          />
+          <Route
+            path="/experiments/harshit-type-motion"
+            element={<HarshitTypeMotion />}
           />
           <Route
             path="/experiments/404"

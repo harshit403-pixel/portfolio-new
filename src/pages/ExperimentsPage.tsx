@@ -24,6 +24,13 @@ const experiments = [
     category: "physics",
     image: "/assets/experiments/404.webp",
     href: "/experiments/404",
+  },
+  {
+    title: "Harshit Type Motion",
+    description: "Type that comes alive",
+    category: "typography",
+    image: "/profile2.webp",
+    href: "/experiments/harshit-type-motion",
   }
 ];
 
