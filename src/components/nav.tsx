@@ -40,10 +40,6 @@ export function Nav({
 
   const navLinks = [
     {
-      label: "Home",
-      path: "/",
-    },
-    {
       label: "Projects",
       path: "/projects",
     },

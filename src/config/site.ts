@@ -92,20 +92,13 @@ export const site = {
   // ABOUT
   // =========================================================
 
-  about: [
-    "I'm Harshit Raghuwanshi, a Full Stack Developer who enjoys building products that combine clean interfaces, solid backend architecture, and real-world functionality.",
+about: [
+  "I'm Harshit Raghuwanshi, a Full Stack Developer who enjoys turning ideas into thoughtfully built products that solve real problems and make people's lives a little easier.",
 
-    "I work primarily with React, Next.js, Node.js, Express, MongoDB, TypeScript, Docker, and modern AI tooling. I enjoy taking an idea from the initial concept all the way to a deployed product.",
+  "I primarily build with the MERN stack and integrate AI into applications through LLMs, RAG pipelines, and intelligent workflows.",
 
-    "I've built applications involving authentication, REST APIs, real-time systems, AI integrations, databases, DevOps, and developer-focused tools. I'm particularly interested in backend engineering, system design, and building products that actually solve problems.",
-  ],
-
-  tldr: [
-    "Building full-stack products.",
-    "Exploring backend engineering.",
-    "Building AI-powered applications.",
-    "Learning system design.",
-  ],
+  "Currently looking for opportunities to contribute to a team, grow as an engineer, and build products that matter.",
+],
 
   // =========================================================
   // CURRENT STATUS
@@ -163,7 +156,7 @@ experience: [
     role: "Web Developer Mentor",
     period: "1 September 2026 – Present",
     blurb:
-      "Mentoring learners in web development by helping them build a strong understanding of modern frontend and backend technologies. Guiding them through practical projects, debugging, code structure, API integration, responsive UI development, and real-world software engineering workflows while helping them improve their problem-solving and development practices.",
+      "• Mentor learners in modern web development, helping them understand frontend and backend fundamentals through practical guidance.\n\n• Guide students through hands-on projects, debugging, API integration, responsive UI development, and code structure.\n\n• Help learners develop problem-solving skills, better coding practices, and an understanding of real-world development workflows.",
     url: "https://notyourcollege.com/",
   },
   {
@@ -171,7 +164,7 @@ experience: [
     role: "Post-LLM Training Intern",
     period: "15 April 2026 – 14 May 2026",
     blurb:
-      "Worked on post-LLM training workflows focused on preparing, reviewing, and improving AI training data. Contributed to data evaluation and quality improvement processes while working with structured workflows designed to help improve the reliability and performance of AI models.",
+      "• Worked on LLM post-training workflows involving dataset preparation, review, and quality evaluation.\n\n• Evaluated model outputs for accuracy, relevance, and hallucinations as part of AI quality improvement processes.\n\n• Contributed to structured data evaluation workflows aimed at improving model reliability and response quality.",
     url: "https://www.ethara.ai/",
   },
 ] as Job[],
@@ -202,12 +195,12 @@ projects: [
 
     stack: [
       "React",
-      "Tailwind CSS",
       "Node.js",
+      "LangChain",
+      "Tailwind CSS",
       "Express.js",
       "MongoDB",
       "MongoDB Atlas Vector Search",
-      "LangChain",
       "LangGraph",
       "Gemini API",
       "GitHub OAuth",
@@ -246,13 +239,13 @@ projects: [
     stack: [
       "React",
       "TypeScript",
+      "Socket.IO",
       "Redux Toolkit",
       "TanStack Query",
       "Tailwind CSS",
       "Node.js",
       "Express.js",
       "MongoDB",
-      "Socket.IO",
       "Zod",
       "JWT",
       "Google OAuth",
@@ -288,16 +281,16 @@ projects: [
       "Voice RAG is a complete voice-to-answer pipeline built for the HHGoa RAG challenge. A user speaks in their own language; Sarvam AI transcribes the audio (saaras:v3) and translates the query to English (mayura:v1). The query passes through input guardrails, is embedded with Mistral (mistral-embed, 1024 dimensions), and is searched against a FAISS HNSW index. Matching chunks are looked up in a SQLite metadata database, checked by a grounding guardrail, and passed to Mistral Large through LangChain, which streams the answer back to the UI over Server-Sent Events in the user's language.\n\nOn the indexing side, passages are chunked (RecursiveCharacterTextSplitter, 700 characters with 100 overlap for long passages), aligned to English, embedded, and stored alongside translations in 12 languages. The server warms its FAISS and SQLite caches on boot, and a sweep benchmark over 97,941 Hindi queries measured P50 retrieval latency of about 0.83 ms (P100 about 69.6 ms) against a 200 ms budget.\n\nThe React frontend includes a voice orb, source cards, and a live execution console that shows each pipeline step with its latency. The project is containerized with a multi-stage Dockerfile and deployed on Render.",
 
     stack: [
-      "React",
       "Node.js",
-      "Express.js",
       "TypeScript",
+      "RAG",
+      "Express.js",
+      "React",
       "LangChain",
       "Mistral AI",
       "Sarvam AI",
       "FAISS",
       "SQLite",
-      "RAG",
       "Speech-to-Text",
       "Server-Sent Events",
       "Docker",
@@ -331,15 +324,15 @@ projects: [
 
     stack: [
       "Next.js",
+      "MongoDB",
+      "Socket.IO",
+      "Monaco Editor",
       "React",
       "Tailwind CSS",
       "Redux Toolkit",
       "GSAP",
-      "Monaco Editor",
-      "Socket.IO",
       "Node.js",
       "Express.js",
-      "MongoDB",
       "JWT",
     ],
 

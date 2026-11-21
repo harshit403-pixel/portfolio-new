@@ -80,9 +80,18 @@ export function Experience({ isDetailed }: { isDetailed?: boolean }) {
 
             {/* Experience Description */}
 
-            <p className="mt-2 max-w-2xl text-[13.5px] leading-relaxed text-[var(--muted)]">
-              {job.blurb}
-            </p>
+            <ul className="mt-3 max-w-2xl space-y-1.5 text-[13.5px] leading-relaxed text-[var(--muted)]">
+              {job.blurb
+                .split("\n\n")
+                .map((bullet, bulletIndex) => (
+                  <li key={bulletIndex} className="flex items-start gap-2">
+                    <span className="mt-0.5 shrink-0 text-[var(--soft)]">
+                      •
+                    </span>
+                    <span>{bullet.replace(/^•\s*/, "")}</span>
+                  </li>
+                ))}
+            </ul>
           </motion.div>
         ))}
 

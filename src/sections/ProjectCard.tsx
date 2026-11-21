@@ -92,7 +92,7 @@ export function ProjectCard({ project: p, index = 0 }: { project: Project; index
       {/* Tech Pills & Direct Links */}
       <div className="mt-4 flex items-center justify-between gap-3 pt-3 border-t border-[var(--line)]/50">
         <div className="flex flex-wrap gap-1.5">
-          {p.stack.map((t) => (
+          {p.stack.slice(0, 3).map((t) => (
             <span
               key={t}
               className="rounded bg-[var(--chip)] px-2 py-0.5 font-mono text-[10.5px] text-[var(--muted)] border border-[var(--line)]/30"

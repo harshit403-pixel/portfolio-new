@@ -6,6 +6,7 @@ import {
   LinkedInIcon,
   MailIcon,
   FileIcon,
+  TwitterIcon,
 } from "./icons";
 
 const items = [
@@ -20,6 +21,12 @@ const items = [
     href: site.socials.linkedin,
     label: "LinkedIn",
     Icon: LinkedInIcon,
+  },
+  {
+    key: "twitter",
+    href: site.socials.twitter,
+    label: "Twitter",
+    Icon: TwitterIcon,
   },
   {
     key: "email",
@@ -59,9 +66,16 @@ const hoverCardsData: Record<
     stats: ["Software Engineering", "Open to Opportunities"],
     bannerText: "connect • build • grow",
   },
+  twitter: {
+    pronouns: "He/Him",
+    handle: "hrstwt",
+    bio: "Full Stack Developer interested in backend engineering, system design, AI, and building real-world software products.",
+    stats: ["Posting Daily", "Open to Opportunities"],
+    bannerText: "connect • build • grow",
+  },
 
   email: {
-    handle: "YOUR_EMAIL@gmail.com",
+    handle: "harshuraghu@gmail.com",
     bio: "Feel free to reach out for software engineering opportunities, collaborations, projects, or technical discussions.",
     stats: ["Direct Contact", "Open to Opportunities"],
     bannerText: "connect • collaborate • build",
