@@ -6,7 +6,7 @@
 
 **A minimal, motion-rich developer portfolio with a blueprint preloader, a playable football banner, and a handful of playful experiments.**
 
-[![Live](https://img.shields.io/badge/live-harshits--portfolio.vercel.app-000?style=for-the-badge&logo=vercel)](https://harshits-portfolio.vercel.app)
+[![Live](https://img.shields.io/badge/live-harshits--portfolio.vercel.app-000?style=for-the-badge&logo=vercel)](https://harshitr.me)
 ![React](https://img.shields.io/badge/React-20232a?style=for-the-badge&logo=react&logoColor=61DAFB)
 ![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white)
 ![Vite](https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite&logoColor=white)
