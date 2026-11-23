@@ -76,6 +76,7 @@ Huge thanks to [Daryl](https://www.imdaryl.com/) for the inspiration. Go check o
 | **Memory Box** | Memories, photos and sounds on a string |
 | **Vending Machine** | A vending machine that dispenses items |
 | **Harshit Type Motion** | Type that comes alive |
+| **The Crowd** | A crowd that forms shapes and dodges a car |
 | **404** | A page that is not found, done with style |
 | **Year Complete** | A contribution year visualizer |
 

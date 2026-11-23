@@ -42,6 +42,13 @@ const experiments: Experiment[] = [
     href: "/experiments/harshit-type-motion",
   },
   {
+    title: "The Crowd",
+    description: "A crowd that forms shapes and dodges a car",
+    category: "interactive",
+    image: "/assets/experiments/crowd.webp",
+    href: "/experiments/crowd",
+  },
+  {
     title: "Year Complete",
     description: "A contribution year visualizer",
     category: "utility",
