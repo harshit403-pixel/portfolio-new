@@ -410,19 +410,25 @@ export default function Crowd() {
 
 const CSS = `
 .crowd-root{--ink:#2b2a28;--mute:#8a867f;--line:#e6e3de;
-  height:100%;min-height:480px;display:flex;flex-direction:column;overflow:hidden;
+  width:100%;height:100dvh;min-height:0;display:flex;flex-direction:column;overflow:hidden;
   background:#fff;color:var(--ink);font-family:"Nunito","Trebuchet MS",system-ui,sans-serif;box-sizing:border-box}
 .crowd-root *{box-sizing:border-box}
-.crowd-head{padding:14px 18px 6px;text-align:center}
+.crowd-head{flex:0 0 auto;padding:clamp(12px,2.2vw,20px) 18px clamp(6px,1vw,10px);text-align:center}
 .crowd-head h1{font-size:15px;font-weight:700;margin:0;letter-spacing:.2px}
-.crowd-head p{margin:2px 0 0;font-size:12.5px;color:var(--mute)}
+.crowd-head p{margin:2px auto 0;max-width:640px;font-size:clamp(11px,1.5vw,12.5px);color:var(--mute)}
 .crowd-stage{flex:1;min-height:0;position:relative}
 .crowd-canvas{position:absolute;inset:0;width:100%;height:100%;display:block;touch-action:none;cursor:none}
-.crowd-nav{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;padding:10px 12px 16px}
+.crowd-nav{flex:0 0 auto;display:flex;flex-wrap:wrap;gap:8px;justify-content:center;padding:10px 12px max(16px, env(safe-area-inset-bottom))}
 .crowd-nav button,.crowd-nav input{font:inherit;font-size:13px;color:var(--ink);background:#fff;border:1px solid var(--line);
   border-radius:999px;padding:8px 15px;cursor:pointer;transition:background .15s,border-color .15s}
 .crowd-nav button:hover{background:#f6f4f1}
 .crowd-nav button.on{background:var(--ink);color:#fff;border-color:var(--ink)}
 .crowd-nav button:focus-visible,.crowd-nav input:focus-visible{outline:2px solid #3b7dd8;outline-offset:2px}
 .crowd-nav input{cursor:text;width:150px}
+@media (max-width: 520px){
+  .crowd-head{padding-inline:12px}
+  .crowd-nav{gap:6px;padding-inline:8px}
+  .crowd-nav button,.crowd-nav input{padding:7px 11px;font-size:12px}
+  .crowd-nav input{width:128px}
+}
 `;
