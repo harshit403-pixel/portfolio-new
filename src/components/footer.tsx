@@ -4,6 +4,7 @@ import { site } from "@/config/site";
 import { ArrowRight, Fingerprint } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useVisitor } from "@/context/VisitorContext";
+import BalloonLetters from "./BalloonLetters";
 
 const QUOTES = [
   {
@@ -27,6 +28,39 @@ const QUOTES = [
     author: "Austin Freeman",
   },
 ];
+
+/** Mounts the WebGL balloons only once the footer is near the viewport. */
+function VisitorBalloons({ value }: { value: string }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const [show, setShow] = useState(false);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setShow(true);
+          io.disconnect();
+        }
+      },
+      { rootMargin: "200px" },
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+
+  return (
+    <div
+      ref={ref}
+      role="img"
+      aria-label={`${value} total visitors`}
+      className="mx-auto mt-6 h-[150px] w-full max-w-[460px] overflow-hidden rounded-2xl "
+    >
+      {show && <BalloonLetters text={value} />}
+    </div>
+  );
+}
 
 type Thumbprint = {
   id: number;
@@ -172,13 +206,11 @@ export function Footer() {
       {/* Footer Bottom */}
       <GapBand h="h-5" />
       <div className="w-full border-t border-[var(--line)]">
-        <Shell className="border-b-0 py-12 text-center">
-          <p className="font-mono text-[10px] font-bold uppercase tracking-[0.3em] text-[var(--soft)]">
+        <Shell className="border-b-0 pt-10  text-center">
+          <p className="font-mono text-[10px] font-bold -mb-6 uppercase tracking-[0.3em] text-[var(--soft)]">
             total visitors so far
           </p>
-          <p className="mt-2 font-mono text-[40px] font-semibold leading-none tabular-nums text-[var(--fg)]">
-            {isLoading || count === null ? "..." : count.toLocaleString()}
-          </p>
+          <VisitorBalloons value={isLoading || count === null ? "..." : String(count)} />
         </Shell>
       </div>
     </footer>
