@@ -309,7 +309,7 @@ export default function BalloonLetters({ text = "portfolio", color = "#9bc53d", 
     <canvas
       ref={ref}
       className={className}
-      style={{ width: "100%", height: "100%", display: "block", touchAction: "none", background: "#0F0E0E", ...style }}
+      style={{ width: "100%", height: "100%", display: "block", touchAction: "none", background: "var(--bg)", ...style }}
     />
   );
 }
