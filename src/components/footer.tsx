@@ -4,7 +4,6 @@ import { site } from "@/config/site";
 import { ArrowRight, Fingerprint } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useVisitor } from "@/context/VisitorContext";
-import BalloonLetters from "./BalloonLetters";
 
 const QUOTES = [
   {
@@ -28,39 +27,6 @@ const QUOTES = [
     author: "Austin Freeman",
   },
 ];
-
-/** Mounts the WebGL balloons only once the footer is near the viewport. */
-function VisitorBalloons({ value }: { value: string }) {
-  const ref = useRef<HTMLDivElement>(null);
-  const [show, setShow] = useState(false);
-
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-    const io = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setShow(true);
-          io.disconnect();
-        }
-      },
-      { rootMargin: "200px" },
-    );
-    io.observe(el);
-    return () => io.disconnect();
-  }, []);
-
-  return (
-    <div
-      ref={ref}
-      role="img"
-      aria-label={`${value} total visitors`}
-      className="mx-auto mt-6 h-[150px] w-full max-w-[460px] overflow-hidden rounded-2xl "
-    >
-      {show && <BalloonLetters text={value} />}
-    </div>
-  );
-}
 
 type Thumbprint = {
   id: number;
@@ -206,11 +172,13 @@ export function Footer() {
       {/* Footer Bottom */}
       <GapBand h="h-5" />
       <div className="w-full border-t border-[var(--line)]">
-        <Shell className="border-b-0 pt-10  text-center">
+        <Shell className="border-b-0 py-10  text-center">
           <p className="font-mono text-[10px] font-bold -mb-6 uppercase tracking-[0.3em] text-[var(--soft)]">
             total visitors so far
           </p>
-          <VisitorBalloons value={isLoading || count === null ? "..." : String(count)} />
+          <p className="mt-8 font-mono text-3xl font-bold tabular-nums tracking-widest text-[var(--fg)]">
+            {isLoading || count === null ? "..." : count}
+          </p>
         </Shell>
       </div>
     </footer>
